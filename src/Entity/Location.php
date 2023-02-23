@@ -40,6 +40,9 @@ class Location
     #[ORM\OneToMany(mappedBy: 'loc', targetEntity: Review::class, orphanRemoval: true)]
     private Collection $messages;
 
+    #[ORM\ManyToOne(inversedBy: 'locations')]
+    private ?Type $type = null;
+
 
     public function __construct()
     {
@@ -161,6 +164,18 @@ class Location
                 $message->setLieu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
