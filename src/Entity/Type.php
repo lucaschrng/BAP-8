@@ -18,7 +18,7 @@ class Type
     #[ORM\Column(length: 255)]
     private ?string $type_name = null;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Location::class)]
+    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'types')]
     private Collection $locations;
 
     public function __construct()
@@ -43,6 +43,11 @@ class Type
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getTypeName();
+    }
+
     /**
      * @return Collection<int, Location>
      */
@@ -55,7 +60,7 @@ class Type
     {
         if (!$this->locations->contains($location)) {
             $this->locations->add($location);
-            $location->setType($this);
+            $location->addType($this);
         }
 
         return $this;
@@ -64,10 +69,7 @@ class Type
     public function removeLocation(Location $location): self
     {
         if ($this->locations->removeElement($location)) {
-            // set the owning side to null (unless already changed)
-            if ($location->getType() === $this) {
-                $location->setType(null);
-            }
+            $location->removeType($this);
         }
 
         return $this;

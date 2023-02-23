@@ -40,13 +40,14 @@ class Location
     #[ORM\OneToMany(mappedBy: 'loc', targetEntity: Review::class, orphanRemoval: true)]
     private Collection $messages;
 
-    #[ORM\ManyToOne(inversedBy: 'locations')]
-    private ?Type $type = null;
+    #[ORM\ManyToMany(targetEntity: Type::class, inversedBy: 'locations')]
+    private Collection $types;
 
 
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->types = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,14 +169,26 @@ class Location
         return $this;
     }
 
-    public function getType(): ?Type
+    /**
+     * @return Collection<int, Type>
+     */
+    public function getTypes(): Collection
     {
-        return $this->type;
+        return $this->types;
     }
 
-    public function setType(?Type $type): self
+    public function addType(Type $type): self
     {
-        $this->type = $type;
+        if (!$this->types->contains($type)) {
+            $this->types->add($type);
+        }
+
+        return $this;
+    }
+
+    public function removeType(Type $type): self
+    {
+        $this->types->removeElement($type);
 
         return $this;
     }
