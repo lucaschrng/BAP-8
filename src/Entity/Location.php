@@ -19,7 +19,7 @@ class Location
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::BLOB)]
+    #[ORM\Column(type: Types::TEXT)]
     private $address = null;
 
     #[ORM\Column]
@@ -28,7 +28,7 @@ class Location
     #[ORM\Column]
     private ?float $longitude = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
