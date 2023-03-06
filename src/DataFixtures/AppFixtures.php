@@ -6,11 +6,14 @@ use App\Entity\Location;
 use App\Entity\Type;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\HttpClient\HttpClient;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $client = HttpClient::create();
+
         $titles = [
             "Anatole France élémentaire",
             "Association Formation Professionnelle des Adultes (AFPA)",
@@ -205,64 +208,64 @@ class AppFixtures extends Fixture
             "9 rue des Suisses, 92350 Le Plessis-Robinson",
             "2, allée Robert-Debré, 92350 Le Plessis-Robinson",
             "2, allée Robert-Debré, 92350 Le Plessis-Robinson",
-            "3, allée Robert Debré92350 Le Plessis-Robinson",
-            "3, allée Robert Debré92350 Le Plessis-Robinson",
-            "3 rue de l’Orangerie92350 Le Plessis-Robinson",
-            "Rue le la Mairie92350 Le Plessis-Robinson",
-            "5, rue de l'Orangerie92350 Le Plessis-Robinson",
-            "3, rue de l'Orangerie92350 Le Plessis-Robinson",
-            "5 avenue du Général Leclerc92350 Le Plessis-Robinson",
-            "1, Place Henri-Barbusse92350 Le Plessis-Robinson",
-            "1, Place de la Résistance92350 Le Plessis-Robinson",
-            "10, rue Louis-Pergaud92350 Le Plessis-Robinson",
-            "4-6 rue de la Ferme92350 Le Plessis-Robinson",
-            "3 rue Auguste-Rodin92350 Le Plessis-Robinson",
-            "20/22 avenue de la Libération92350 Le Plessis-Robinson",
-            "9, avenue Roger Salengro92350 CHATENAY-MALABRY",
-            "9, Chemin de la Côte Sainte Catherine92350 Le Plessis-Robinson",
+            "3, allée Robert Debré, 92350 Le Plessis-Robinson",
+            "3, allée Robert Debré, 92350 Le Plessis-Robinson",
+            "3 rue de l’Orangerie, 92350 Le Plessis-Robinson",
+            "Rue le la Mairie, 92350 Le Plessis-Robinson",
+            "5, rue de l'Orangerie, 92350 Le Plessis-Robinson",
+            "3, rue de l'Orangerie, 92350 Le Plessis-Robinson",
+            "5 avenue du Général Leclerc, 92350 Le Plessis-Robinson",
+            "1, Place Henri-Barbusse, 92350 Le Plessis-Robinson",
+            "1, Place de la Résistance, 92350 Le Plessis-Robinson",
+            "10, rue Louis-Pergaud, , 92350 Le Plessis-Robinson",
+            "4-6 rue de la Ferme, 92350 Le Plessis-Robinson",
+            "3 rue Auguste-Rodin, 92350 Le Plessis-Robinson",
+            "20/22 avenue de la Libération, 92350 Le Plessis-Robinson",
+            "9, avenue Roger Salengro, 92350 CHATENAY-MALABRY",
+            "9, Chemin de la Côte Sainte Catherine, 92350 Le Plessis-Robinson",
             "34 rue Edmond-About, 92350 Le Plessis-Robinson",
             "81/83 avenue Edouard Herriot, 92350 Le Plessis-Robinson",
-            "6 rue de la Ferme92350 Le Plessis-Robinson",
-            "4-6, rue de la Ferme92350 Le Plessis-Robinson",
-            "Place des Déportés et Internés de la Résistance92350 Le Plessis-Robinson",
-            "Place des déportes et Internés de la Résistance92350 Le Plessis-Robinson",
-            "Place des déportes et Internés de la Résistance92350 Le Plessis-Robinson",
-            "Place des Déportés et Internés de la Résistance92350 Le Plessis-Robinson",
-            "Place des Déportés et Internés de la Résistance92350 Le Plessis-Robinson",
-            "4, rue Louis Pergaud92350 Le Plessis-Robinson",
-            "4, rue Louis-Pergaud92350 Le Plessis-Robinson",
-            "21, rue du Capitaine Facq92350 Le Plessis-Robinson",
+            "6 rue de la Ferme, 92350 Le Plessis-Robinson",
+            "4-6, rue de la Ferme, 92350 Le Plessis-Robinson",
+            "Place des Déportés et Internés de la Résistance, 92350 Le Plessis-Robinson",
+            "Place des déportes et Internés de la Résistance, 92350 Le Plessis-Robinson",
+            "Place des déportes et Internés de la Résistance, 92350 Le Plessis-Robinson",
+            "Place des Déportés et Internés de la Résistance, 92350 Le Plessis-Robinson",
+            "Place des Déportés et Internés de la Résistance, 92350 Le Plessis-Robinson",
+            "4, rue Louis Pergaud, 92350 Le Plessis-Robinson",
+            "4, rue Louis-Pergaud, 92350 Le Plessis-Robinson",
+            "21, rue du Capitaine Facq, 92350 Le Plessis-Robinson",
             "9 rue Pierre-d’Artagnan",
-            "70, rue du Moulin Fidel92350 Le Plessis-Robinson",
-            "42, avenue Aristide-Briand92160 Antony",
-            "Place de la Libération92350 Le Plessis-Robinson",
-            "30, avenue Charles de Gaulle92350 Le Plessis-Robinson",
-            "Villa des Hortensias92350 Le Plessis-Robinson",
-            "Parc de la Vallée aux Loups92350 Le Plessis-Robinson",
-            "Avenue Paul-Langevin et avenue Galilée92350 Le Plessis-Robinson",
-            "Rue du Moulin Fidel92350 Le Plessis-Robinson",
-            "Parc Henri Sellier92350 Le Plessis-Robinson",
-            "5, rue Blaise Pascal92350 Le Plessis-Robinson",
-            "Cour de l'Hôtel de Ville92350 Le Plessis-Robinson",
-            "3 bis, rue Pierre d'Artagnan92350 Le Plessis-Robinson",
-            "4, avenue de la Libération92350 Le Plessis-Robinson",
-            "8 Grande Rue92350 Le Plessis-Robinson",
-            "Promenade des berges92350 Le Plessis-Robinson",
-            "Rue du Moulin Fidel92350 Le Plessis-Robinson",
-            "4-6, rue de la Ferme92350 Le Plessis-Robinson",
-            "1, square Jacques-Ange-Gabriel92350 Le Plessis-Robinson",
-            "23, rue de la Raye Tortue92350 Le Plessis-Robinson",
-            "123, rue de Malabry.92350 Le Plessis-Robinson",
-            "Rue Louis-Pergaud92350 Le Plessis-Robinson",
-            "14, avenue Galilée92350 Le Plessis-Robinson",
-            "287, avenue du Général de Gaulle92350 CLAMART",
-            "5, rue Pierre d’Artagnan92350 Le Plessis-Robinson",
-            "30, avenue du Général-Leclerc92350 Le Plessis-Robinson",
-            "14, avenue Galilée92350 Le Plessis-Robinson",
-            "14, avenue Galilée92350 Le Plessis-Robinson",
-            "9 avenue Paul-Langevin92350 Le Plessis-Robinson",
+            "70, rue du Moulin Fidel, 92350 Le Plessis-Robinson",
+            "42, avenue Aristide-Briand, 92160 Antony",
+            "Place de la Libération, 92350 Le Plessis-Robinson",
+            "30, avenue Charles de Gaulle, 92350 Le Plessis-Robinson",
+            "Villa des Hortensias, 92350 Le Plessis-Robinson",
+            "Parc de la Vallée aux Loups, 92350 Le Plessis-Robinson",
+            "Avenue Paul-Langevin et avenue Galilée, 92350 Le Plessis-Robinson",
+            "Rue du Moulin Fidel, 92350 Le Plessis-Robinson",
+            "Parc Henri Sellier, 92350 Le Plessis-Robinson",
+            "5, rue Blaise Pascal, 92350 Le Plessis-Robinson",
+            "Cour de l'Hôtel de Ville, 92350 Le Plessis-Robinson",
+            "3 bis, rue Pierre d'Artagnan, 92350 Le Plessis-Robinson",
+            "4, avenue de la Libération, 92350 Le Plessis-Robinson",
+            "8 Grande Rue, 92350 Le Plessis-Robinson",
+            "Promenade des berges, 92350 Le Plessis-Robinson",
+            "Rue du Moulin Fidel, 92350 Le Plessis-Robinson",
+            "4-6, rue de la Ferme, 92350 Le Plessis-Robinson",
+            "1, square Jacques-Ange-Gabriel, 92350 Le Plessis-Robinson",
+            "23, rue de la Raye Tortue, 92350 Le Plessis-Robinson",
+            "123, rue de Malabry, 92350 Le Plessis-Robinson",
+            "Rue Louis-Pergaud, 92350 Le Plessis-Robinson",
+            "14, avenue Galilée, 92350 Le Plessis-Robinson",
+            "287, avenue du Général de Gaulle, 92350 CLAMART",
+            "5, rue Pierre d’Artagnan, 92350 Le Plessis-Robinson",
+            "30, avenue du Général-Leclerc, 92350 Le Plessis-Robinson",
+            "14, avenue Galilée, 92350 Le Plessis-Robinson",
+            "14, avenue Galilée, 92350 Le Plessis-Robinson",
+            "9 avenue Paul-Langevin, 92350 Le Plessis-Robinson",
             "Avenue Paul-Langevin et avenue Galilée B.P. 3492350 Le Plessis-Robinson",
-            "10, rue Louis-Pergaud92350 Le Plessis-Robinson"
+            "10, rue Louis-Pergaud, 92350 Le Plessis-Robinson"
         ];
 
         $categories = ['Services municipaux',
@@ -424,8 +427,21 @@ class AppFixtures extends Fixture
             $location = new Location();
             $location->setName($titles[$i-1]);
             $location->setAddress($addresslist[$i-1]);
-            $location->setLatitude(0);
-            $location->setLongitude(1);
+            if (is_numeric($addresslist[$i-1][0])) {
+                $typeUrl = 'housenumber';
+            } else {
+                $typeUrl = 'street';
+            }
+            $response = $client->request('GET', 'https://api-adresse.data.gouv.fr/search/?q=' . urlencode($addresslist[$i-1]) . '&type=' . $typeUrl . '&autocomplete=1');
+            $response = $response->toArray();
+            if (array_key_exists(0, ($response['features']))) {
+                $response = $response['features'][0]['properties'];
+                $location->setLatitude($response['x']);
+                $location->setLongitude($response['y']);
+            } else {
+                $location->setLatitude(0);
+                $location->setLongitude(0);
+            }
             $location->setDescription('Ceci est une description de ' . $titles[$i-1]);
             $location->setImage('Image_url');
             $type = $manager->getRepository(Type::class)->findOneBy(['type_name' => $categoriesrepeated[$i-1]]);
