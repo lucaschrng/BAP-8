@@ -2,45 +2,67 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(normalizationContext: ['groups' => 'location:item']),
+        new GetCollection(normalizationContext: ['groups' => 'location:list'])
+    ],
+    order: ['id' => 'DESC'],
+    paginationEnabled: false,
+)]
 class Location
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['location:list', 'location:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['location:list', 'location:item'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['location:list', 'location:item'])]
     private $address = null;
 
     #[ORM\Column]
+    #[Groups(['location:list', 'location:item'])]
     private ?float $latitude = null;
 
     #[ORM\Column]
+    #[Groups(['location:list', 'location:item'])]
     private ?float $longitude = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['location:list', 'location:item'])]
     private $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['location:list', 'location:item'])]
     private ?string $image = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['location:list', 'location:item'])]
     private array $horaires = [];
 
     #[ORM\OneToMany(mappedBy: 'loc', targetEntity: Review::class, orphanRemoval: true)]
+    #[Groups(['location:list', 'location:item'])]
     private Collection $messages;
 
     #[ORM\ManyToMany(targetEntity: Type::class, inversedBy: 'locations')]
+    #[Groups(['location:list', 'location:item'])]
     private Collection $types;
 
 
