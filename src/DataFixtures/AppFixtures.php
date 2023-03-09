@@ -432,12 +432,12 @@ class AppFixtures extends Fixture
             } else {
                 $typeUrl = 'street';
             }
-            $response = $client->request('GET', 'https://api-adresse.data.gouv.fr/search/?q=' . urlencode($addresslist[$i-1]) . '&type=' . $typeUrl . '&autocomplete=1');
+            $response = $client->request('GET', 'https://api.geoapify.com/v1/geocode/search?text=' . urlencode($addresslist[$i-1]) . '&apiKey=977dfc7340ca46af8c75b8b6928c4a7a' );
             $response = $response->toArray();
             if (array_key_exists(0, ($response['features']))) {
                 $response = $response['features'][0]['properties'];
-                $location->setLatitude($response['x']);
-                $location->setLongitude($response['y']);
+                $location->setLatitude($response['lat']);
+                $location->setLongitude($response['lon']);
             } else {
                 $location->setLatitude(0);
                 $location->setLongitude(0);

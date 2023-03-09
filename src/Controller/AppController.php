@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\LocationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,4 +16,5 @@ class AppController extends AbstractController
             'controller_name' => 'AppController',
         ]);
     }
+
 }
