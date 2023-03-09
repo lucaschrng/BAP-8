@@ -18,9 +18,9 @@ import './bootstrap';
 function initMap() {
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
-        iconRetinaUrl: require('/images/marker-icon-2x.png'),
-        iconUrl: require('/images/marker-icon.png'),
-        shadowUrl: require('/images/marker-shadow.png')
+        iconRetinaUrl: require('../public/images/marker-icon-2x.png'),
+        iconUrl: require('../public/images/marker-icon.png'),
+        shadowUrl: require('../public/images/marker-shadow.png')
     });
 
     let map = L.map('map').setView([48.780718, 2.266203], 40);
