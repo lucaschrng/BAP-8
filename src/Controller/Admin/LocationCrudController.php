@@ -21,8 +21,8 @@ class LocationCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             TextField::new('address'),
-            NumberField::new('latitude')->setNumDecimals(2),
-            NumberField::new('longitude')->setNumDecimals(2),
+            NumberField::new('latitude')->setNumDecimals(6),
+            NumberField::new('longitude')->setNumDecimals(6),
             TextEditorField::new('description'),
             AssociationField::new('types')
         ];
