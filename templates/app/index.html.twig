@@ -5,6 +5,10 @@
 {% block body %}
 
     <div id="map" style="height: 400px; width: 100%"></div>
+    <label for="type">Type de lieu</label>
+    <select name="type" id="type">
+        <option value="all">Tous</option>
+    </select>
     <div id="test"></div>
 
     {% block javascripts %}

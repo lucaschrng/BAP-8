@@ -65,6 +65,8 @@ class Location
     #[Groups(['location:list', 'location:item'])]
     private Collection $types;
 
+    #[Groups(['location:list', 'location:item'])]
+    private array $typesIds = [];
 
     public function __construct()
     {
@@ -213,5 +215,14 @@ class Location
         $this->types->removeElement($type);
 
         return $this;
+    }
+
+    public function getTypesIds(): ?array
+    {
+        $this->typesIds = [];
+        foreach ($this->types as $type) {
+            $this->typesIds[] = $type->getId();
+        }
+        return $this->typesIds;
     }
 }

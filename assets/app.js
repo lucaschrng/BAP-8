@@ -34,24 +34,67 @@ function initMap() {
     marker.bindPopup("<b>Hello world!</b><br><a href='#'>I am a popup</a>.").openPopup();
 }
 
+let locations;
+let markers = [];
 function fetchData(){
     fetch('http://127.0.0.1:8000/api/locations')
         .then((response) => response.json())
         .then((data) => {
-            let location = data['hydra:member']
-            for (let i = 0; i < location.length; i++) {
-                console.log(location[i])
-                console.log(location[i].latitude)
-                let name = location[i].name
+            locations = data['hydra:member']
+            locations.forEach((location) => {
+                let name = location.name
                 let popupContent = "<b>" + name + "</b><br><a href='#'>I am a popup</a>";
                 let popup = L.popup().setContent(popupContent);
-                let marker = L.marker([location[i].latitude, location[i].longitude]).addTo(map);
+                let marker = L.marker([location.latitude, location.longitude]);
+                markers.push(marker);
+                marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
-            }
+            })
         })
 }
 
-window.addEventListener('load', fetchData)
+let select = document.getElementById("type");
+if (select) {
+    function addOptions() {
+        fetch("http://127.0.0.1:8000/api/types")
+            .then((response) => response.json())
+            .then((data) => {
+                const types = data['hydra:member'];
+                types.forEach((type) => {
+                    let option = document.createElement("option");
+                    option.value = type.id;
+                    option.text = type['type_name'];
+                    select.add(option);
+                })
+            })
+    }
+
+    select.addEventListener('change', (event) => {
+        let typeId = event.target.value;
+        markers.forEach((marker) => {
+            map.removeLayer(marker);
+        })
+        markers = [];
+        locations.forEach((location) => {
+            if (location.typesIds.includes(parseInt(typeId)) || typeId === 'all') {
+                let name = location.name
+                let popupContent = "<b>" + name + "</b><br><a href='#'>I am a popup</a>";
+                let popup = L.popup().setContent(popupContent);
+                let marker = L.marker([location.latitude, location.longitude]);
+                markers.push(marker);
+                marker.addTo(map);
+                marker.bindPopup(popup).openPopup();
+            }
+        })
+    })
+
+    window.addEventListener('load', addOptions);
+}
+
+window.addEventListener('load', () => {
+    fetchData();
+    initMap();
+})
 window.addEventListener('load', initMap);
 
 

@@ -2,23 +2,38 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(normalizationContext: ['groups' => 'type:item']),
+        new GetCollection(normalizationContext: ['groups' => 'type:list'])
+    ],
+    order: ['id' => 'DESC'],
+    paginationEnabled: false,
+)]
 class Type
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['type:list', 'type:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['type:list', 'type:item'])]
     private ?string $type_name = null;
 
     #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'types')]
+    #[Groups(['type:list', 'type:item'])]
     private Collection $locations;
 
     public function __construct()
