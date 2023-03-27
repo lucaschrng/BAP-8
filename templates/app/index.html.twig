@@ -3,16 +3,48 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-
-    <div id="map" style="height: 400px; width: 100%"></div>
-    <label for="type">Type de lieu</label>
-    <select name="type" id="type">
-        <option value="all">Tous</option>
-    </select>
-    <div id="test"></div>
-
+    <section>
+        <div class="flex">
+            <div class="flex flex-col items-center w-[372px] h-[100vh] bg-colorGreen text-white">
+                <h2 class="text-3xl mt-6 mb-5">
+                    Filtres
+                </h2>
+                <div class="mb-8">
+                    <input class="w-[324px] h-[37px] type="text" placeholder="Search..">
+                </div>
+                <div class="w-[270px]">
+                    {% for type in types %}
+                    <div class=" grid gap-[10px] mb-[5px]">
+                        <div class="flex">
+                            <i class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
+                            <p class="text-2xl">{{ type }}</p>
+                        </div>
+                        {% for location in type.locations %}
+                            <li class="ml-[30px] "> {{ location }}</li>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="map" class=" h-[100vh] w-[80vw]"></div>
+        </div>
+        <label for="type">Type de lieu</label>
+        <select name="type" id="type">
+            <option value="all">Tous</option>
+        </select>
+        <div id="test"></div>
+        <p>Latitude : <span id="lat"> zajblkazeblkazbnkelazklenl</span></p>
+        <h2>qskdobqsjdb</h2>
+    </section>
+    <style>     
+        * {
+            font-family: "finalsix",sans-serif;
+        }
+        h2 {
+            font-family: "bely-display",sans-serif;
+        }
+    </style> 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
-
 {% endblock %}

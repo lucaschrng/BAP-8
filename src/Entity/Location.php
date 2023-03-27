@@ -225,4 +225,8 @@ class Location
         }
         return $this->typesIds;
     }
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }
