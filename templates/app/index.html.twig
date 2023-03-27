@@ -10,9 +10,9 @@
                     Filtres
                 </h2>
                 <div class="mb-8">
-                    <input class="w-[324px] h-[37px] type="text" placeholder="Search..">
+                    <input class="w-[324px] h-[37px] text-black" type="text" placeholder="Search..">
                 </div>
-                <div class="w-[270px]">
+                <div class="w-[270px] overflow-auto">
                     {% for type in types %}
                     <div class=" grid gap-[10px] mb-[5px]">
                         <div class="flex">
@@ -20,21 +20,22 @@
                             <p class="text-2xl">{{ type }}</p>
                         </div>
                         {% for location in type.locations %}
-                            <li class="ml-[30px] "> {{ location }}</li>
+                            <li class="ml-[30px] hidden"> {{ location }}</li>
                         {% endfor %}
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            <div id="map" class=" h-[100vh] w-[80vw]"></div>
+            <div class="flex items-end">
+                <div id="map" class="fixed h-[100vh] w-[80vw]"></div>
+                <div class="w-[1556px] h-[286px] bg-red-500 z-[1]">
+                </div>  
+            </div>
         </div>
         <label for="type">Type de lieu</label>
         <select name="type" id="type">
             <option value="all">Tous</option>
         </select>
-        <div id="test"></div>
-        <p>Latitude : <span id="lat"> zajblkazeblkazbnkelazklenl</span></p>
-        <h2>qskdobqsjdb</h2>
     </section>
     <style>     
         * {
