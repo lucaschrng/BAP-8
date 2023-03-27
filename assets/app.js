@@ -43,7 +43,8 @@ function fetchData(){
             locations = data['hydra:member']
             locations.forEach((location) => {
                 let name = location.name
-                let popupContent = "<b>" + name + "</b><br><a href='#'>I am a popup</a>";
+                let address = location.address
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
@@ -78,7 +79,8 @@ if (select) {
         locations.forEach((location) => {
             if (location.typesIds.includes(parseInt(typeId)) || typeId === 'all') {
                 let name = location.name
-                let popupContent = "<b>" + name + "</b><br><a href='#'>I am a popup</a>";
+                let address = location.address
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
