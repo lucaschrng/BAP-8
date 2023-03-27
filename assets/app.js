@@ -5,7 +5,6 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -98,5 +97,3 @@ window.addEventListener('load', () => {
     initMap();
 })
 window.addEventListener('load', initMap);
-
-
