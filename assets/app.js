@@ -44,23 +44,83 @@ function fetchData() {
         .then((data) => {
             locations = data['hydra:member']
             locations.forEach((location) => {
+                let image = Location.image
                 let name = location.name
                 let address = location.address
+                let horaire = location.horaires
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
-                marker.on('click', () => {
-                    selectedLocation.innerHTML = `
-                        <h2 class="popup-title">${location.name}</h2>
-                        <p class="popup-address">${location.address}</p>
-                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
-                    `;
-                    selectedLocation.classList.add('active');
-                })
-            })
+                if (image == null) {
+                    if (horaire.length == 0) {                
+                        marker.on('click', () => {
+                            selectedLocation.innerHTML = `
+                                <img class="popup-image" src="${require("../public/images/image-missing.png")}" alt="image-missing">
+                                <div class="box-popup">
+                                    <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-address">${location.address}</p>
+                                    <p class="popup-horaire">Aucune horaire indiquée</p>
+                                </div>
+                                <p class="popup-description">${location.description}</p>
+                                <div class="popup-cta">
+                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                </div>
+                                <div class="cross">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                                
+                            `;
+                            selectedLocation.classList.add('active');
+                        })
+                    } else {
+                        marker.on('click', () => {
+                            selectedLocation.innerHTML = `
+                                <img class="popup-image" src="${require("../public/images/image-missing.png")}" alt="image-missing">
+                                <div class="box-popup">
+                                    <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-address">${location.address}</p>
+                                    <p class="popup-horaire">${location.horaires}</p>
+                                </div>
+                                <p class="popup-description">${location.description}</p>
+                                <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                            `;
+                            selectedLocation.classList.add('active');
+                        })
+                    }
+                } else {
+                    if (horaire.length == 0) {   
+                        marker.on('click', () => {
+                            selectedLocation.innerHTML = `
+                                <img class="popup-image" src="${location.image}" alt="${location.name}">
+                                <div class="box-popup">
+                                    <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-address">${location.address}</p>
+                                    <p class="popup-horaire">Aucune horaire indiquée</p>
+                                </div>
+                            <p class="popup-description">${location.description}</p>
+                            <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                            `;
+                            selectedLocation.classList.add('active');
+                        })
+                    } else {
+                        marker.on('click', () => {
+                            selectedLocation.innerHTML = `
+                                <img class="popup-image" src="${location.image}" alt="${location.name}">
+                                <div class="box-popup">
+                                    <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-address">${location.address}</p>
+                                    <p class="popup-horaire">${location.horaires}</p>
+                                </div>
+                                <p class="popup-description">${location.description}</p>
+                                <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                            `;
+                            selectedLocation.classList.add('active');
+                        })
+                    }
+            } })
         })
 }
 
@@ -148,3 +208,13 @@ window.addEventListener('load', () => {
     initMap();
 })
 window.addEventListener('load', initMap);
+
+let menus = document.querySelectorAll('[id^="menu-btn-"]');
+let navbars = document.querySelectorAll('[id^="navbar-"]');
+
+for (let i = 0; i < menus.length; i++) {
+  menus[i].onclick = () => {
+    menus[i].classList.toggle('fa-times');
+    navbars[i].classList.toggle('active');
+  }
+}

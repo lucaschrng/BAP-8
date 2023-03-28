@@ -1,3 +1,107 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: "finalsix",sans-serif;
+}
+h2 {
+    font-family: "bely-display",sans-serif;
+}
+[id^="menu-btn-"] {
+    transition: .3s linear;
+}
+[id^="menu-btn-"].fa-times{
+    transform: rotate(180deg);
+    transition: .3s linear;
+}
+[id^="navbar-"] {
+    background-color: red;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: .2s linear;
+}
+[id^="navbar-"].active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);  
+    transition: .2s linear;                  
+}
+[id^="navbar-"].active li {
+    display: block;
+}
+
+#location-content {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1556px;
+    height: 286px;
+    background: white;
+    z-index: 1;
+}
+#location-content.active {
+    display: flex;
+} 
+.popup-image {
+    width: 20vw;
+    height: 100%;
+    object-fit: contain;
+}
+.box-popup {
+    display: flex;
+    flex-direction: column;
+    margin: 24px;
+    width: 35vw;
+}
+.popup-title{
+    font-size: 48px;
+    font-family: Bely Display;
+    color: #19647E;
+    line-height: 90%;
+}
+.popup-address{
+    margin: 12px 0 24px 0;
+    font-size: 16px;
+}
+
+.popup-description {
+    display: flex;
+    flex-direction: column;
+    margin: 52px 52px 24px 0 ;
+    font-size: 16px;
+}
+
+.cross {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: .1rem solid black;
+}
+
+.cross {
+    font-size: 15px;
+    rotate: 45deg;
+}
+
+.popup-cta {
+    position: absolute;
+    bottom: 36px;
+    right: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 163px;
+    height: 48px;
+    background-color: #FC6B3B;
+    border-radius: 8px;
+}
+
+.popup-cta .popup-directions{
+    font-size: 20px;
+    color: white;
+}

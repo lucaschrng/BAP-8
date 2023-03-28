@@ -9,10 +9,12 @@
                 <h2 class="text-3xl mt-6 mb-5">
                     Filtres
                 </h2>
-                <div class="mb-8 flex">
-                    <input id="search" class="w-[150px] h-[37px] text-black" type="text" placeholder="Search..">
-                    <div class="text-black">
-                        <select name="type" id="type" class="150px">
+                <div class="mb-8 flex flex-col">
+                    <div class="w-[324px] h-[37px] text-black rounded-[5px] bg-white">
+                        <input id="search" class="mx-[10px] w-[304px] h-[37px] outline-none rounded-[5px]" type="text" placeholder="Search..">
+                    </div>
+                    <div class="w-[324px] h-[37px]  mt-3 text-black rounded-[5px] bg-white">
+                        <select name="type" id="type" class="mx-[10px] w-[304px] h-[37px] text-black outline-none rounded-[5px]">
                             <option value="all">Tous</option>
                         </select>
                     </div>
@@ -33,66 +35,13 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="flex items-end">
+            <div class="flex flex-col items-end">
                 <div id="map" class="fixed h-[100vh] w-[81.05vw] right-[0]"></div> 
-                <!-- ======= Need a fix ======= -->
-                <div class="popup-container" id="location-content">
-                </div>             
-                <!-- ======= Need a fix ======= -->
+                <div class="popup-container w-[81.05vw]" id="location-content">
+            </div>             
             </div>
         </div>
     </section>
-    <style>     
-        * {
-            font-family: "finalsix",sans-serif;
-        }
-        h2 {
-            font-family: "bely-display",sans-serif;
-        }
-        [id^="menu-btn-"] {
-            transition: .3s linear;
-        }
-        [id^="menu-btn-"].fa-times{
-            transform: rotate(180deg);
-            transition: .3s linear;
-        }
-        [id^="navbar-"] {
-            background-color: red;
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            transition: .2s linear;
-        }
-        [id^="navbar-"].active {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);  
-            transition: .2s linear;                  
-        }
-        [id^="navbar-"].active li {
-            display: block;
-        }
-        .popup-container {
-            display: none;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: red;
-            padding: 10px;
-            z-index: 999;
-          }
-          
-          .popup-container.active {
-            display: block;
-          }
-    </style> 
-    <script>
-        let menus = document.querySelectorAll('[id^="menu-btn-"]');
-        let navbars = document.querySelectorAll('[id^="navbar-"]');
-      
-        for (let i = 0; i < menus.length; i++) {
-          menus[i].onclick = () => {
-            menus[i].classList.toggle('fa-times');
-            navbars[i].classList.toggle('active');
-          }
-        }
-    </script>
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
