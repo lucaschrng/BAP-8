@@ -29,7 +29,14 @@
                 </div>
             </div>
             <div class="flex items-end">
-                <div id="map" class="fixed h-[100vh] w-[81.05vw] right-[0]"></div>
+                <div id="map" class="fixed h-[100vh] w-[81.05vw] right-[0]"></div> 
+                <!-- ======= Need a fix ======= -->
+                <div class="popup-container" id="popup-container">
+                    <h2 class="popup-title">Titre</h2>
+                    <p class="popup-address">Adresse</p>
+                    <a class="popup-directions" href="" target="_blank">Directions</a>
+                </div>             
+                <!-- ======= Need a fix ======= -->
             </div>
         </div>
         <label for="type">Type de lieu</label>
@@ -52,6 +59,7 @@
             transition: .3s linear;
         }
         [id^="navbar-"] {
+            background-color: red;
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
             transition: .2s linear;
         }
@@ -62,6 +70,19 @@
         [id^="navbar-"].active li {
             display: block;
         }
+        .popup-container {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: red;
+            padding: 10px;
+            z-index: 999;
+          }
+          
+          .popup-container.active {
+            display: block;
+          }
     </style> 
     <script>
         let menus = document.querySelectorAll('[id^="menu-btn-"]');

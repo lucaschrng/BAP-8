@@ -53,6 +53,50 @@ function fetchData(){
         })
 }
 
+// <!-- ======= Need a fix ======= -->
+function createPopupContent(location) {
+    let name = location.name;
+    let address = location.address;
+  
+    // Create the popup HTML content
+    let content = document.createElement('div');
+    content.innerHTML = `
+      <div class="popup-trigger" onclick="showPopup()"></div>
+      <div class="popup-container" id="popup-container">
+        <h2 class="popup-title">${name}</h2>
+        <p class="popup-address">${address}</p>
+        <a class="popup-directions" href="https://www.google.com/maps/place/${address}" target="_blank">Directions</a>
+      </div>
+    `;
+  
+    return content;
+  }
+  
+  // Function to show the popup-container
+  function showPopup() {
+    document.getElementById("popup-container").classList.add('active');
+  }
+  
+  // Add click event listener to each marker
+  markers.forEach((marker, index) => {
+    marker.on('click', () => {
+      // Get the location data for this marker
+      let location = locations[index];
+  
+      // Create the popup content
+      let popupContent = createPopupContent(location);
+  
+      // Create the popup and bind it to the marker
+      let popup = L.popup().setContent(popupContent);
+      marker.bindPopup(popup);
+  
+      // Show the popup container
+      let popupContainer = popupContent.querySelector('.popup-container');
+      document.body.appendChild(popupContainer);
+    });
+  });
+//                   <!-- ======= Need a fix ======= -->
+  
 let select = document.getElementById("type");
 if (select) {
     function addOptions() {
