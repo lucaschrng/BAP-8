@@ -10,26 +10,24 @@
                     Filtres
                 </h2>
                 <div class="mb-8">
-                    <input class="w-[324px] h-[37px] text-black" type="text" placeholder="Search..">
+                    <input id="search" class="w-[324px] h-[37px] text-black" type="text" placeholder="Search..">
                 </div>
-                <div class="w-[270px] overflow-auto">
+                <div class="w-[300px] overflow-auto">
                     {% for type in types %}
                     <div class=" grid gap-[10px] mb-[5px]">
                         <div class="flex">
                             <i class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
-                            <p class="text-2xl">{{ type }}</p>
+                            <p class="text-[16px]">{{ type }}</p>
                         </div>
                         {% for location in type.locations %}
-                            <li class="ml-[30px] hidden"> {{ location }}</li>
+                            <li class="ml-[30px] mr-[5px]"> {{ location }}</li>
                         {% endfor %}
                     </div>
                     {% endfor %}
                 </div>
             </div>
             <div class="flex items-end">
-                <div id="map" class="fixed h-[100vh] w-[80vw]"></div>
-                <div class="w-[1556px] h-[286px] bg-red-500 z-[1]">
-                </div>  
+                <div id="map" class="fixed h-[100vh] w-[81.05vw] right-[0]"></div>
             </div>
         </div>
         <label for="type">Type de lieu</label>

@@ -79,7 +79,7 @@ if (select) {
             if (location.typesIds.includes(parseInt(typeId)) || typeId === 'all') {
                 let name = location.name
                 let address = location.address
-                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
+                let popupContent = "<b>"  + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
@@ -90,6 +90,30 @@ if (select) {
     })
 
     window.addEventListener('load', addOptions);
+}
+
+let search = document.getElementById("search");
+if (search) {
+    console.log(search)
+    search.addEventListener('keyup', (event) => {
+        let searchValue = event.target.value;
+        markers.forEach((marker) => {
+            map.removeLayer(marker);
+        })
+        markers = [];
+        locations.forEach((location) => {
+            if (location.name.toLowerCase().includes(searchValue.toLowerCase())) {
+                let name = location.name
+                let address = location.address
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
+                let popup = L.popup().setContent(popupContent);
+                let marker = L.marker([location.latitude, location.longitude]);
+                markers.push(marker);
+                marker.addTo(map);
+                marker.bindPopup(popup).openPopup();
+            }
+        })
+    })
 }
 
 window.addEventListener('load', () => {
