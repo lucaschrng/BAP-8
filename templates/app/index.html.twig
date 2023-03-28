@@ -16,12 +16,14 @@
                     {% for type in types %}
                     <div class=" grid gap-[10px] mb-[5px]">
                         <div class="flex">
-                            <i class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
+                            <i id="menu-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
                             <p class="text-[16px]">{{ type }}</p>
                         </div>
-                        {% for location in type.locations %}
-                            <li class="ml-[30px] mr-[5px]"> {{ location }}</li>
-                        {% endfor %}
+                        <div id="navbar-{{ loop.index }}" class="relative top-0 right-0">
+                            {% for location in type.locations %}
+                                <li class="ml-[30px] mr-[5px] hidden"> {{ location }}</li>
+                            {% endfor %}
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
@@ -42,7 +44,36 @@
         h2 {
             font-family: "bely-display",sans-serif;
         }
+        [id^="menu-btn-"] {
+            transition: .3s linear;
+        }
+        [id^="menu-btn-"].fa-times{
+            transform: rotate(180deg);
+            transition: .3s linear;
+        }
+        [id^="navbar-"] {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: .2s linear;
+        }
+        [id^="navbar-"].active {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);  
+            transition: .2s linear;                  
+        }
+        [id^="navbar-"].active li {
+            display: block;
+        }
     </style> 
+    <script>
+        let menus = document.querySelectorAll('[id^="menu-btn-"]');
+        let navbars = document.querySelectorAll('[id^="navbar-"]');
+      
+        for (let i = 0; i < menus.length; i++) {
+          menus[i].onclick = () => {
+            menus[i].classList.toggle('fa-times');
+            navbars[i].classList.toggle('active');
+          }
+        }
+    </script>
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
