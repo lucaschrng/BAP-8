@@ -61,6 +61,7 @@ function fetchData() {
                                 <img class="popup-image" src="${require("../public/images/image-missing.png")}" alt="image-missing">
                                 <div class="box-popup">
                                     <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">Aucune horaire indiquée</p>
                                 </div>
@@ -68,7 +69,7 @@ function fetchData() {
                                 <div class="popup-cta">
                                     <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
                                 </div>
-                                <div class="cross">
+                                <div id="cross" class="cross">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
                                 
@@ -81,11 +82,17 @@ function fetchData() {
                                 <img class="popup-image" src="${require("../public/images/image-missing.png")}" alt="image-missing">
                                 <div class="box-popup">
                                     <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">${location.horaires}</p>
                                 </div>
                                 <p class="popup-description">${location.description}</p>
-                                <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                                <div class="popup-cta">
+                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                </div>
+                                <div id="cross" class="cross">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
                             `;
                             selectedLocation.classList.add('active');
                         })
@@ -97,11 +104,17 @@ function fetchData() {
                                 <img class="popup-image" src="${location.image}" alt="${location.name}">
                                 <div class="box-popup">
                                     <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">Aucune horaire indiquée</p>
                                 </div>
-                            <p class="popup-description">${location.description}</p>
-                            <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                                <p class="popup-description">${location.description}</p>
+                                <div class="popup-cta">
+                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                </div>
+                                <div id="cross" class="cross">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
                             `;
                             selectedLocation.classList.add('active');
                         })
@@ -111,11 +124,17 @@ function fetchData() {
                                 <img class="popup-image" src="${location.image}" alt="${location.name}">
                                 <div class="box-popup">
                                     <h2 class="popup-title">${location.name}</h2>
+                                    <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">${location.horaires}</p>
                                 </div>
                                 <p class="popup-description">${location.description}</p>
-                                <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                                <div class="popup-cta">
+                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                </div>
+                                <div id="cross" class="cross">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
                             `;
                             selectedLocation.classList.add('active');
                         })
@@ -213,8 +232,8 @@ let menus = document.querySelectorAll('[id^="menu-btn-"]');
 let navbars = document.querySelectorAll('[id^="navbar-"]');
 
 for (let i = 0; i < menus.length; i++) {
-  menus[i].onclick = () => {
-    menus[i].classList.toggle('fa-times');
-    navbars[i].classList.toggle('active');
-  }
+    menus[i].onclick = () => {
+        menus[i].classList.toggle('fa-times');
+        navbars[i].classList.toggle('active');
+    }
 }

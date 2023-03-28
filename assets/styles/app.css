@@ -50,7 +50,7 @@ h2 {
     display: flex;
     flex-direction: column;
     margin: 24px;
-    width: 35vw;
+    width: 25vw;
 }
 .popup-title{
     font-size: 48px;
@@ -58,15 +58,19 @@ h2 {
     color: #19647E;
     line-height: 90%;
 }
+.popup-type {
+    margin-top: 16px;
+    font-size: 16px;
+}
 .popup-address{
-    margin: 12px 0 24px 0;
+    margin: 8px 0 16px 0;
     font-size: 16px;
 }
 
 .popup-description {
     display: flex;
     flex-direction: column;
-    margin: 52px 52px 24px 0 ;
+    margin: 32px 52px 24px 0 ;
     font-size: 16px;
 }
 
