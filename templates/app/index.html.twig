@@ -9,12 +9,17 @@
                 <h2 class="text-3xl mt-6 mb-5">
                     Filtres
                 </h2>
-                <div class="mb-8">
-                    <input id="search" class="w-[324px] h-[37px] text-black" type="text" placeholder="Search..">
+                <div class="mb-8 flex">
+                    <input id="search" class="w-[150px] h-[37px] text-black" type="text" placeholder="Search..">
+                    <div class="text-black">
+                        <select name="type" id="type" class="150px">
+                            <option value="all">Tous</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="w-[300px] overflow-auto">
                     {% for type in types %}
-                    <div class=" grid gap-[10px] mb-[5px]">
+                    <div class="grid gap-[10px] mb-[5px]">
                         <div class="flex">
                             <i id="menu-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
                             <p class="text-[16px]">{{ type }}</p>
@@ -39,10 +44,6 @@
                 <!-- ======= Need a fix ======= -->
             </div>
         </div>
-        <label for="type">Type de lieu</label>
-        <select name="type" id="type">
-            <option value="all">Tous</option>
-        </select>
     </section>
     <style>     
         * {
