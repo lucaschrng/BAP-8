@@ -33,9 +33,12 @@ function initMap() {
     marker.bindPopup("<b>Hello world!</b><br><a href='#'>I am a popup</a>.").openPopup();
 }
 
+let selectedLocation = document.querySelector('#location-content');
 let locations;
 let markers = [];
-function fetchData(){
+let markersHtml;
+
+function fetchData() {
     fetch('http://127.0.0.1:8000/api/locations')
         .then((response) => response.json())
         .then((data) => {
@@ -43,60 +46,24 @@ function fetchData(){
             locations.forEach((location) => {
                 let name = location.name
                 let address = location.address
-                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
+                marker.on('click', () => {
+                    selectedLocation.innerHTML = `
+                        <h2 class="popup-title">${location.name}</h2>
+                        <p class="popup-address">${location.address}</p>
+                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                    `;
+                    selectedLocation.classList.add('active');
+                })
             })
         })
 }
 
-// <!-- ======= Need a fix ======= -->
-function createPopupContent(location) {
-    let name = location.name;
-    let address = location.address;
-  
-    // Create the popup HTML content
-    let content = document.createElement('div');
-    content.innerHTML = `
-      <div class="popup-trigger" onclick="showPopup()"></div>
-      <div class="popup-container" id="popup-container">
-        <h2 class="popup-title">${name}</h2>
-        <p class="popup-address">${address}</p>
-        <a class="popup-directions" href="https://www.google.com/maps/place/${address}" target="_blank">Directions</a>
-      </div>
-    `;
-  
-    return content;
-  }
-  
-  // Function to show the popup-container
-  function showPopup() {
-    document.getElementById("popup-container").classList.add('active');
-  }
-  
-  // Add click event listener to each marker
-  markers.forEach((marker, index) => {
-    marker.on('click', () => {
-      // Get the location data for this marker
-      let location = locations[index];
-  
-      // Create the popup content
-      let popupContent = createPopupContent(location);
-  
-      // Create the popup and bind it to the marker
-      let popup = L.popup().setContent(popupContent);
-      marker.bindPopup(popup);
-  
-      // Show the popup container
-      let popupContainer = popupContent.querySelector('.popup-container');
-      document.body.appendChild(popupContainer);
-    });
-  });
-//                   <!-- ======= Need a fix ======= -->
-  
 let select = document.getElementById("type");
 if (select) {
     function addOptions() {
@@ -123,12 +90,20 @@ if (select) {
             if (location.typesIds.includes(parseInt(typeId)) || typeId === 'all') {
                 let name = location.name
                 let address = location.address
-                let popupContent = "<b>"  + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
+                marker.on('click', () => {
+                    selectedLocation.innerHTML = `
+                        <h2 class="popup-title">${location.name}</h2>
+                        <p class="popup-address">${location.address}</p>
+                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                    `;
+                    selectedLocation.classList.add('active');
+                })
             }
         })
     })
@@ -149,12 +124,20 @@ if (search) {
             if (location.name.toLowerCase().includes(searchValue.toLowerCase())) {
                 let name = location.name
                 let address = location.address
-                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/"+ address + "'>Itinéraire</a>";
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
+                marker.on('click', () => {
+                    selectedLocation.innerHTML = `
+                        <h2 class="popup-title">${location.name}</h2>
+                        <p class="popup-address">${location.address}</p>
+                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
+                    `;
+                    selectedLocation.classList.add('active');
+                })
             }
         })
     })
