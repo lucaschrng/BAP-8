@@ -168,3 +168,6 @@ h2 {
         position: static;
     }
 }
+.leaflet-control-attribution {
+    display: none;
+}
