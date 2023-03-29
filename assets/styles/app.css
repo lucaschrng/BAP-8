@@ -7,7 +7,7 @@
     font-weight: 400;
     font-style: normal;
 }
-h2 {
+h1, h2 {
     font-family: bely-display, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -146,7 +146,7 @@ h2 {
 @media screen and (min-width: 1500px) and (max-width: 1670px) {
     #location-content {
         background-color: red;
-    }²
+    }
     .box-middle {
         width: 30vw;
     }

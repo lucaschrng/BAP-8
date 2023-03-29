@@ -4,41 +4,46 @@
 
 {% block body %}
     <section>
-        <div class="flex">
-            <div class="flex flex-col items-center w-[372px] h-[100vh] bg-colorGreen text-white max-[1500px]:hidden">   
-                <h2 class="text-3xl mt-6 mb-5">
-                    Filtres
-                </h2>
-                <div class="mb-8 flex flex-col">
-                    <div class="w-[324px] h-[37px] text-black rounded-[5px] bg-white">
-                        <input id="search" class="mx-[10px] w-[304px] h-[37px] outline-none rounded-[5px]" type="text" placeholder="Search..">
-                    </div>
-                    <div class="w-[324px] h-[37px]  mt-3 text-black rounded-[5px] bg-white">
-                        <select name="type" id="type" class="mx-[10px] w-[304px] h-[37px] text-black outline-none rounded-[5px]">
-                            <option value="all">Tous</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w-[300px] overflow-auto">
-                    {% for type in types %}
-                    <div class="grid gap-[10px] mb-[5px]">
-                        <div class="flex">
-                            <i id="menu-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
-                            <p class="text-[16px]">{{ type }}</p>
-                        </div>
-                        <div id="navbar-{{ loop.index }}" class="relative top-0 right-0">
-                            {% for location in type.locations %}
-                                <li class="ml-[30px] mr-[5px] hidden"> {{ location }}</li>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+        <div class="flex flex-col">
+            <div class="flex flex-row items-center justify-between bg-colorGreen w-full h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
+                <h1 class="text-[32px]"> Cartes  Interactive </h1>
+                <div id="menu-btn" class="fas fa-bars text-[2rem] cursor-pointer desktop:hidden"></div>
             </div>
-            <div class="flex flex-col items-end">
-                <div id="map" class="fixed  h-[100vh] w-[calc(100%-373px)] right-[0]"></div> 
-                <div class="popup-container w-[calc(100%-373px)] flex flex-row" id="location-content">
-            </div>             
+            <div class="flex flex-row-reverse desktop:flex-row">
+                <div class="flex flex-col items-center w-[372px] h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10">   
+                    <h2 class="text-3xl mt-6 mb-5">
+                        Filtres
+                    </h2>
+                    <div class="mb-8 flex flex-col">
+                        <div class="w-[324px] h-[37px] text-black rounded-[5px] bg-white">
+                            <input id="search" class="mx-[10px] w-[304px] h-[37px] outline-none rounded-[5px]" type="text" placeholder="Search..">
+                        </div>
+                        <div class="w-[324px] h-[37px]  mt-3 text-black rounded-[5px] bg-white">
+                            <select name="type" id="type" class="mx-[10px] w-[304px] h-[37px] text-black outline-none rounded-[5px]">
+                                <option value="all">Tous</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="w-[300px] overflow-auto">
+                        {% for type in types %}
+                        <div class="grid gap-[10px] mb-[5px]">
+                            <div class="flex">
+                                <i id="menu-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
+                                <p class="text-[16px]">{{ type }}</p>
+                            </div>
+                            <div id="navbar-{{ loop.index }}" class="relative top-0 right-0">
+                                {% for location in type.locations %}
+                                    <li class="ml-[30px] mr-[5px] hidden"> {{ location }}</li>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="flex flex-col items-end">
+                    <div id="map" class="fixed w-full h-[calc(100%-96px)] desktop:h-[100vh] desktop:w-[calc(100%-373px)] right-[0]"></div> 
+                    <div class="popup-container w-[calc(100%-373px)] flex flex-row" id="location-content"></div>
+                </div>
             </div>
         </div>
     </section>
