@@ -72,9 +72,12 @@ function fetchData() {
                                 <div id="cross" class="cross">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
-                                
-                            `;
+                            `;                  
                             selectedLocation.classList.add('active');
+                            let cross = document.getElementById('cross');
+                            cross.addEventListener('click',  () => {
+                                selectedLocation.classList.remove('active');
+                            })
                         })
                     } else {
                         marker.on('click', () => {
@@ -95,6 +98,10 @@ function fetchData() {
                                 </div>
                             `;
                             selectedLocation.classList.add('active');
+                            let cross = document.getElementById('cross');
+                            cross.addEventListener('click',  () => {
+                                selectedLocation.classList.remove('active');
+                            })
                         })
                     }
                 } else {
@@ -117,7 +124,12 @@ function fetchData() {
                                 </div>
                             `;
                             selectedLocation.classList.add('active');
+                            let cross = document.getElementById('cross');
+                            cross.addEventListener('click',  () => {
+                                selectedLocation.classList.remove('active');
+                            })
                         })
+
                     } else {
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
@@ -137,6 +149,10 @@ function fetchData() {
                                 </div>
                             `;
                             selectedLocation.classList.add('active');
+                            let cross = document.getElementById('cross');
+                            cross.addEventListener('click',  () => {
+                                selectedLocation.classList.remove('active');
+                            })
                         })
                     }
             } })
