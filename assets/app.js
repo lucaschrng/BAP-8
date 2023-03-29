@@ -59,15 +59,21 @@ function fetchData() {
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
                                 <img class="popup-image" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                                <div class="box-popup">
+                                <div class="box-middle">
                                     <h2 class="popup-title">${location.name}</h2>
                                     <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">Aucune horaire indiquée</p>
                                 </div>
-                                <p class="popup-description">${location.description}</p>
-                                <div class="popup-cta">
-                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                <div class="box-right">
+                                    <p class="popup-horaire">Aucune horaire indiquée</p>
+                                    <p class="popup-description">${location.description}</p>
+                                    <div class="popup-cta">
+                                        <div class="container">
+                                            <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                            <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="cross" class="cross">
                                     <i class="fa-solid fa-plus"></i>
@@ -91,7 +97,10 @@ function fetchData() {
                                 </div>
                                 <p class="popup-description">${location.description}</p>
                                 <div class="popup-cta">
-                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                    <div class="container">
+                                        <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                    </div>
                                 </div>
                                 <div id="cross" class="cross">
                                     <i class="fa-solid fa-plus"></i>
@@ -117,7 +126,10 @@ function fetchData() {
                                 </div>
                                 <p class="popup-description">${location.description}</p>
                                 <div class="popup-cta">
-                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                    <div class="container">
+                                        <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                    </div>
                                 </div>
                                 <div id="cross" class="cross">
                                     <i class="fa-solid fa-plus"></i>
@@ -129,7 +141,6 @@ function fetchData() {
                                 selectedLocation.classList.remove('active');
                             })
                         })
-
                     } else {
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
@@ -142,7 +153,10 @@ function fetchData() {
                                 </div>
                                 <p class="popup-description">${location.description}</p>
                                 <div class="popup-cta">
-                                    <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                    <div class="container">
+                                        <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                    </div>
                                 </div>
                                 <div id="cross" class="cross">
                                     <i class="fa-solid fa-plus"></i>
@@ -191,14 +205,6 @@ if (select) {
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
-                marker.on('click', () => {
-                    selectedLocation.innerHTML = `
-                        <h2 class="popup-title">${location.name}</h2>
-                        <p class="popup-address">${location.address}</p>
-                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
-                    `;
-                    selectedLocation.classList.add('active');
-                })
             }
         })
     })
@@ -225,14 +231,6 @@ if (search) {
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
-                marker.on('click', () => {
-                    selectedLocation.innerHTML = `
-                        <h2 class="popup-title">${location.name}</h2>
-                        <p class="popup-address">${location.address}</p>
-                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Directions</a>
-                    `;
-                    selectedLocation.classList.add('active');
-                })
             }
         })
     })
