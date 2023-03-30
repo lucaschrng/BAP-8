@@ -6,46 +6,45 @@
     <section>
         <div class="flex flex-col">
             {# Menu #}
-            <section class="flex flex-row items-center justify-between bg-colorGreen w-full h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
-                <h1 class="text-[32px]"> Cartes  Interactive </h1>
+            <section class="flex flex-row items-center justify-between bg-colorGreen w-full h-[56px] tablet:h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
+                <h1 class="text-[24px] tablet:text-[32px]"> Cartes Interactive </h1>
                 <div id="menu-btn" class="fas fa-bars text-[2rem] cursor-pointer"></div>
             </section>
             <div class="flex flex-row-reverse desktop:flex-row">
                {# Filtres #}
-                <section id="filtre" class="flex flex-col items-center w-[372px] h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">   
+                <section id="filtre" class="flex flex-col items-center w-[320px] tablet:w-[372px] h-[calc(100vh-64px)] tablet:h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">   
                     <div class="flex items-center">
-                        <div id="close-filtre" class="flex items-center justify-center relative right-[80px] w-[36px] h-[36px] rounded-full border-2 border-white ml-[36px] cursor-pointer desktop:hidden"><i class="fa-solid fa-chevron-left text-[12px]"></i></div>
+                        <div id="close-filtre" class="flex items-center justify-center relative right-[60px] tablet:right-[80px] w-[36px] h-[36px] rounded-full border-2 border-white ml-[36px] cursor-pointer desktop:hidden"><i class="fa-solid fa-chevron-left text-[12px]"></i></div>
                         <h2 class="text-3xl mt-6 mb-5 pr-[70px] desktop:p-0"> Filtres </h2>
                     </div>
-                    <div class="mb-8 flex flex-col">
-                        <div class="w-[324px] h-[37px] text-black rounded-[5px] bg-white">
-                            <input id="search" class="mx-[10px] w-[304px] h-[37px] outline-none rounded-[5px]" type="text" placeholder="Search..">
+                    <div class="mb-8 flex flex-col justify-center">
+                        <div class="w-[280px] tablet:w-[324px] h-[37px] text-black rounded-[5px] bg-white">
+                            <input id="search" class="mx-[10px] w-[260px] tablet:w-[304px] h-[37px] outline-none rounded-[5px]" type="text" placeholder="Search..">
                         </div>
-                        <div class="w-[324px] h-[37px]  mt-3 text-black rounded-[5px] bg-white">
-                            <select name="type" id="type" class="mx-[10px] w-[304px] h-[37px] text-black outline-none rounded-[5px]">
+                        <div class="w-[280px] tablet:w-[324px] h-[37px]  mt-3 text-black rounded-[5px] bg-white">
+                            <select name="type" id="type" class="mx-[10px] w-[260px] tablet:w-[304px] h-[37px] text-black outline-none rounded-[5px]">
                                 <option value="all">Tous</option>
                             </select>
                         </div>
                     </div>
-                    <div class="w-[300px] overflow-auto">
+                    <div class="w-[280px] tablet:w-[300px] overflow-auto">
                         {% for type in types %}
                         <div class="grid gap-[10px] mb-[5px]">
                             <div class="flex">
                                 <i id="filter-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
                                 <p class="text-[16px]">{{ type }}</p>
                             </div>
-                            <div id="navbar-{{ loop.index }}" class="relative top-0 right-0">
+                            <div id="navbar-{{ loop.index }}" class="flex flex-col gap-[10px] relative top-0 right-0 mb-[5px]">
                                 {% for location in type.locations %}
                                     <li class="ml-[30px] mr-[5px] hidden"> {{ location }} </li>
                                 {% endfor %}
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </section>
                 {# Map #}
                 <section class="flex flex-col items-end">
-                    <div id="map" class="fixed w-full h-[calc(100%-96px)] desktop:h-[100vh] desktop:w-[calc(100%-373px)] right-[0]"></div> 
+                    <div id="map" class="fixed w-full h-[calc(100%-56px)] tablet:h-[calc(100%-96px)] desktop:h-[100vh] desktop:w-[calc(100%-373px)] right-[0]"></div> 
                     <div class="popup-container hidden absolute bottom-0 right-0 bg-white z-1 overflow-y-auto w-full h-[769px] desktop:h-[300px] desktop:w-[calc(100%-373px)] flex flex-col desktop:flex-row" id="location-content"></div>
                 </section>
             </div>

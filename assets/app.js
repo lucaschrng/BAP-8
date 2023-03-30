@@ -57,27 +57,29 @@ function fetchData() {
                     if (horaire.length == 0) {                
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
-                                <img class="popup-image w-full h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                                <section class="flex flex-col mt-6 mr-6 ml-5 desktop:w-full">
+                                <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${require("../public/images/image-missing.png")}" alt="image-missing">
+                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
                                     <div class="flex justify-between items-start">
-                                        <h2 class="popup-title text-[48px] desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                        <div id="cross" class="fa-solid fa-plus flex items-center justify-center text-base w-8 h-8 rotate-[45deg] rounded-full border-[.1rem] border-soli border-black cursor-pointer"></div>
+                                        <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
+                                        <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
+                                            <i class="fa-solid fa-plus text-base rotate-45"></i>
+                                        </div>
                                     </div>
                                     <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                    <div class="flex items-end justify-between">
-                                        <p class="popup-horaire text-2xl font-semibold">Aucune horaire indiquée</p>
-                                        <div class="flex flex-col items-end">
-                                            <p class="popup-description text-xs desktop:text-base font-medium text-colorOrange mb-2">${location.description}</p>
-                                            <div class="flex gap-8">
+                                    <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
+                                        <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">Aucune horaire indiquée</p>
+                                        <div class="flex flex-col items-start tablet:items-end">
+                                            <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
+                                            <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
                                                 <a class="popup-info 
                                                 flex justify-center items-center bg-white text-base font-bold
                                                 border-4 border-solid border-colorGreen rounded-lg 
-                                                w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
+                                                tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
                                                 " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
                                                 <a class="popup-directions 
                                                 flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                                w-[150px] desktop:w-[163px] h-12  desktop:text-xl
+                                                tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
                                                 " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
                                             </div>
                                         </div>
