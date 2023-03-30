@@ -70,7 +70,7 @@ function fetchData() {
                                     <p class="popup-description">${location.description}</p>
                                     <div class="popup-cta">
                                         <div class="container">
-                                            <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                            <a class="popup-info" href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
                                             <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
                                         </div>
                                     </div>
@@ -89,17 +89,20 @@ function fetchData() {
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
                                 <img class="popup-image" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                                <div class="box-popup">
+                                <div class="box-middle">
                                     <h2 class="popup-title">${location.name}</h2>
                                     <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">${location.horaires}</p>
                                 </div>
-                                <p class="popup-description">${location.description}</p>
-                                <div class="popup-cta">
-                                    <div class="container">
-                                        <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
-                                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                <div class="box-right">
+                                    <p class="popup-horaire">${location.horaires}</p>
+                                    <p class="popup-description">${location.description}</p>
+                                    <div class="popup-cta">
+                                        <div class="container">
+                                            <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                            <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="cross" class="cross">
@@ -118,17 +121,20 @@ function fetchData() {
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
                                 <img class="popup-image" src="${location.image}" alt="${location.name}">
-                                <div class="box-popup">
+                                <div class="box-middle">
                                     <h2 class="popup-title">${location.name}</h2>
                                     <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">Aucune horaire indiquée</p>
                                 </div>
-                                <p class="popup-description">${location.description}</p>
-                                <div class="popup-cta">
-                                    <div class="container">
-                                        <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
-                                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                <div class="box-right">
+                                    <p class="popup-horaire">Aucune horaire indiquée</p>
+                                    <p class="popup-description">${location.description}</p>
+                                    <div class="popup-cta">
+                                        <div class="container">
+                                            <a class="popup-info" href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
+                                            <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="cross" class="cross">
@@ -145,17 +151,20 @@ function fetchData() {
                         marker.on('click', () => {
                             selectedLocation.innerHTML = `
                                 <img class="popup-image" src="${location.image}" alt="${location.name}">
-                                <div class="box-popup">
+                                <div class="box-middle">
                                     <h2 class="popup-title">${location.name}</h2>
                                     <p class="popup-type">${location.typesNames.join(', ')}</p>
                                     <p class="popup-address">${location.address}</p>
                                     <p class="popup-horaire">${location.horaires}</p>
                                 </div>
-                                <p class="popup-description">${location.description}</p>
-                                <div class="popup-cta">
-                                    <div class="container">
-                                        <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
-                                        <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                <div class="box-right">
+                                    <p class="popup-horaire">${location.horaires}</p>
+                                    <p class="popup-description">${location.description}</p>
+                                    <div class="popup-cta">
+                                        <div class="container">
+                                            <a class="popup-info" href="https://www.google.com/maps/place/${location.info}" target="_blank">En savoir plus</a>
+                                            <a class="popup-directions" href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="cross" class="cross">
@@ -242,12 +251,20 @@ window.addEventListener('load', () => {
 })
 window.addEventListener('load', initMap);
 
-let menus = document.querySelectorAll('[id^="menu-btn-"]');
+let filters = document.querySelectorAll('[id^="filter-btn-"]');
 let navbars = document.querySelectorAll('[id^="navbar-"]');
 
-for (let i = 0; i < menus.length; i++) {
-    menus[i].onclick = () => {
-        menus[i].classList.toggle('fa-times');
+for (let i = 0; i < filters.length; i++) {
+    filters[i].onclick = () => {
+       filters[i].classList.toggle('fa-times');
         navbars[i].classList.toggle('active');
     }
+}
+
+let menu = document.querySelector('#menu-btn');
+let filtre = document.querySelector('#filtre')
+
+menu.onclick = () => {
+    menu.classList.toggle('fa-times');
+    filtre.classList.toggle('active');
 }

@@ -5,12 +5,14 @@
 {% block body %}
     <section>
         <div class="flex flex-col">
-            <div class="flex flex-row items-center justify-between bg-colorGreen w-full h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
+            {# Menu #}
+            <section class="flex flex-row items-center justify-between bg-colorGreen w-full h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
                 <h1 class="text-[32px]"> Cartes  Interactive </h1>
                 <div id="menu-btn" class="fas fa-bars text-[2rem] cursor-pointer desktop:hidden"></div>
-            </div>
+            </section>
             <div class="flex flex-row-reverse desktop:flex-row">
-                <div class="flex flex-col items-center w-[372px] h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10">   
+               {# Filtres #}
+                <section id="filtre" class="flex flex-col items-center w-[372px] h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">   
                     <h2 class="text-3xl mt-6 mb-5">
                         Filtres
                     </h2>
@@ -28,22 +30,23 @@
                         {% for type in types %}
                         <div class="grid gap-[10px] mb-[5px]">
                             <div class="flex">
-                                <i id="menu-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
+                                <i id="filter-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
                                 <p class="text-[16px]">{{ type }}</p>
                             </div>
                             <div id="navbar-{{ loop.index }}" class="relative top-0 right-0">
                                 {% for location in type.locations %}
-                                    <li class="ml-[30px] mr-[5px] hidden"> {{ location }}</li>
+                                    <li class="ml-[30px] mr-[5px] hidden"> {{ location }} </li>
                                 {% endfor %}
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-                </div>
-                <div class="flex flex-col items-end">
+                </section>
+                {# Map #}
+                <section class="flex flex-col items-end">
                     <div id="map" class="fixed w-full h-[calc(100%-96px)] desktop:h-[100vh] desktop:w-[calc(100%-373px)] right-[0]"></div> 
                     <div class="popup-container w-[calc(100%-373px)] flex flex-row" id="location-content"></div>
-                </div>
+                </section>
             </div>
         </div>
     </section>
