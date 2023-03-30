@@ -30,145 +30,10 @@ h1, h2 {
     display: block;
 }
 
-#location-content {
-    display: none;
-    position: absolute;
-    bottom: 0;
-    right: 0;  
-    height: 286px;
-    background-color: white;
-    z-index: 1;
-}
 #location-content.active {
     display: flex;
-} 
-.popup-image {
-    width: 20vw;
-    height: 100%;
-    object-fit: contain;
-}
-.box-middle {
-    display: flex;
-    flex-direction: column;
-    margin: 24px 24px 0px 24px;
-    width: 25vw;
-    padding-bottom: 24px;
-}
-.box-middle .popup-title{
-    font-size: 48px;
-    font-family: Bely Display;
-    color: #19647E;
-    line-height: 90%;
-}
-.box-middle .popup-type {
-    margin-top: 16px;
-    font-size: 16px;
-}
-.box-middle .popup-address{
-    margin: 8px 0 16px 0;
-    font-size: 16px;
-}
-.box-middle .popup-horaire {
-    font-size: 24px;
-    font-weight: 600;
 }
 
-.box-right {
-    margin:  32px 52px 24px;
-}
-
-.box-right .popup-horaire {
-    display: none;
-    font-size: 24px;
-    font-weight: 600;
-}
-.box-right .popup-description {
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-}
-
-.cross {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 100%;
-    border: .1rem solid black;
-}
-
-.cross {
-    font-size: 15px;
-    rotate: 45deg;
-}
-
-.popup-cta {
-    position: absolute;
-    bottom: 36px;
-    right: 96px;
-}
-.popup-cta .container {
-    display: flex;
-    flex-direction: row;
-    gap: 32px;
-}
-.popup-cta .container .popup-info{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 241px;
-    height: 48px;
-    background-color: white;
-    font-size: 20px;
-    font-weight: 700;
-    border: 4px solid #1A6E6A;
-    border-radius: 8px;
-}
-.popup-cta .container .popup-directions{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 163px;
-    height: 48px;
-    background-color: #FC6B3B;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 8px;
-    color: white;
-}
-
-@media screen and (min-width: 1500px) and (max-width: 1670px) {
-    #location-content {
-        background-color: red;
-    }
-    .box-middle {
-        width: 30vw;
-    }
-    .box-middle .popup-title{
-        font-size: 36px;
-    }
-    .box-middle .popup-horaire {
-        display: none;
-    }
-    .box-right .popup-horaire {
-        display: flex;
-        flex-direction: column;
-        gap: 50px;
-    }
-    .box-right .popup-description {
-        margin: 8px 0 56px 0;
-    }
-    .popup-cta {
-        position: static;
-    }
-}
-.leaflet-control-attribution {
-    display: none;
-}
 @media screen and (max-width: 1501px) {
     #menu-btn {
         transition: .2s linear;
@@ -188,4 +53,5 @@ h1, h2 {
         transition: .4s ease-out;  
         opacity: 100%;              
     }
+
 }

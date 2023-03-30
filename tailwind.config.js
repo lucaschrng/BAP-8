@@ -14,6 +14,7 @@ module.exports = {
     },
     fontFamily : {
       sans: ['bely-display', 'sans-serif'],
+      txt: ['finalsix', 'sans-serif'],
     },
     screens: {
       'tablet': '640px',
