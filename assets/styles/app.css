@@ -34,7 +34,7 @@ h1, h2 {
     display: flex;
 }
 
-@media screen and (max-width: 1501px) {
+@media screen and (max-width: 1499px) {
     #menu-btn {
         transition: .2s linear;
     }
@@ -53,5 +53,4 @@ h1, h2 {
         transition: .4s ease-out;  
         opacity: 100%;              
     }
-
 }
