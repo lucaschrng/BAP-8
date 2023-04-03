@@ -34,8 +34,55 @@ function initMap() {
 }
 
 let selectedLocation = document.querySelector('#location-content');
+let filtre = document.getElementById('filtre')
+let menu = document.getElementById('menu-btn');
 let locations;
 let markers = [];
+
+function displayLocation(image, name, typesNames, address, horaires, description, info) {
+    selectedLocation.innerHTML = `
+        <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${image ? image : require("../public/images/image-missing.png")}" alt="${location.name}">
+        <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
+            <div class="flex justify-between items-start">
+                <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${name}</h2>
+                <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
+                    <i class="fa-solid fa-plus text-base rotate-45"></i>
+                </div>
+            </div>
+            <p class="popup-type mt-6 text-base">${typesNames}</p>
+            <p class="popup-address mt-2 mb-4 text-base">${address}</p>
+            <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
+                <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">${horaires ? horaires : 'Aucune horaire indiquée'}</p>
+                <div class="flex flex-col items-start tablet:items-end">
+                    <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${description}</p>
+                    <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
+                        <a class="popup-info 
+                        flex justify-center items-center bg-white text-base font-bold
+                        border-4 border-solid border-colorGreen rounded-lg 
+                        tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
+                        " href="https://www.google.com/search?${info}" target="_blank">En savoir plus</a>
+                        <a class="popup-directions 
+                        flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
+                        tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
+                        " href="https://www.google.com/maps/place/${address}" target="_blank">Y aller</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;                  
+    selectedLocation.classList.add('active');
+    let cross = document.getElementById('cross');
+    cross.addEventListener('click',  () => {
+        selectedLocation.classList.remove('active');
+    })
+    menu.onclick = () => {
+        selectedLocation.classList.remove('active');
+        menu.classList.toggle('fa-times');
+        filtre.classList.toggle('active');
+    }
+    filtre.classList.remove('active');
+    menu.classList.remove('fa-times');
+}
 
 function fetchData() {
     fetch('http://127.0.0.1:8000/api/locations')
@@ -45,171 +92,20 @@ function fetchData() {
             locations.forEach((location) => {
                 let image = location.image
                 let name = location.name
+                let typesNames = location.typesNames.join(', ')
                 let address = location.address
                 let horaire = location.horaires
+                let description = location.description
+                let info = location.info
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
-                marker.bindPopup(popup).openPopup();
-                if (image == null) {
-                    if (horaire.length == 0) {                
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                                <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                        <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                            <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                        </div>
-                                    </div>
-                                    <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                    <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                    <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                        <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">Aucune horaire indiquée</p>
-                                        <div class="flex flex-col items-start tablet:items-end">
-                                            <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                            <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                                <a class="popup-info 
-                                                flex justify-center items-center bg-white text-base font-bold
-                                                border-4 border-solid border-colorGreen rounded-lg 
-                                                tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                                " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                                <a class="popup-directions 
-                                                flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                                tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                                " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            `;                  
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    } else {
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                            <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                            <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                <div class="flex justify-between items-start">
-                                    <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                    <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                        <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                    </div>
-                                </div>
-                                <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                    <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">${location.horaires}</p>
-                                    <div class="flex flex-col items-start tablet:items-end">
-                                        <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                        <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                            <a class="popup-info 
-                                            flex justify-center items-center bg-white text-base font-bold
-                                            border-4 border-solid border-colorGreen rounded-lg 
-                                            tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                            " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                            <a class="popup-directions 
-                                            flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                            tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                            " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            `;
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    }
-                } else {
-                    if (horaire.length == 0) {   
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                                <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${location.image}" alt="${location.name}">
-                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                        <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                            <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                        </div>
-                                    </div>
-                                    <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                    <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                    <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                        <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">Aucune horaire indiquée</p>
-                                        <div class="flex flex-col items-start tablet:items-end">
-                                            <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                            <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                                <a class="popup-info 
-                                                flex justify-center items-center bg-white text-base font-bold
-                                                border-4 border-solid border-colorGreen rounded-lg 
-                                                tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                                " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                                <a class="popup-directions 
-                                                flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                                tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                                " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            `;
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    } else {
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                            <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${location.image}" alt="${location.name}">
-                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                <div class="flex justify-between items-start">
-                                    <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                    <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                        <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                    </div>
-                                </div>
-                                <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                    <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">${location.horaires}</p>
-                                    <div class="flex flex-col items-start tablet:items-end">
-                                        <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                        <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                            <a class="popup-info 
-                                            flex justify-center items-center bg-white text-base font-bold
-                                            border-4 border-solid border-colorGreen rounded-lg 
-                                            tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                            " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                            <a class="popup-directions 
-                                            flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                            tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                            " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            `;
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    }
-                } 
+                marker.bindPopup(popup).openPopup();            
+                marker.on('click', () => {
+                        displayLocation(image, name, typesNames, address, horaire, description, info)
+                })
             })
         })
 }
@@ -238,177 +134,25 @@ if (select) {
         markers = [];
         locations.forEach((location) => {
             if (location.typesIds.includes(parseInt(typeId)) || typeId === 'all') {
-                let name = location.name
-                let address = location.address
                 let image = location.image
+                let name = location.name
+                let typesNames = location.typesNames.join(', ')
+                let address = location.address
                 let horaire = location.horaires
+                let description = location.description
+                let info = location.info
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
-                if (image == null) {
-                    if (horaire.length == 0) {                
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                                <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                        <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                            <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                        </div>
-                                    </div>
-                                    <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                    <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                    <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                        <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">Aucune horaire indiquée</p>
-                                        <div class="flex flex-col items-start tablet:items-end">
-                                            <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                            <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                                <a class="popup-info 
-                                                flex justify-center items-center bg-white text-base font-bold
-                                                border-4 border-solid border-colorGreen rounded-lg 
-                                                tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                                " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                                <a class="popup-directions 
-                                                flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                                tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                                " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            `;                  
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    } else {
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                            <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${require("../public/images/image-missing.png")}" alt="image-missing">
-                            <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                <div class="flex justify-between items-start">
-                                    <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                    <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                        <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                    </div>
-                                </div>
-                                <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                    <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">${location.horaires}</p>
-                                    <div class="flex flex-col items-start tablet:items-end">
-                                        <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                        <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                            <a class="popup-info 
-                                            flex justify-center items-center bg-white text-base font-bold
-                                            border-4 border-solid border-colorGreen rounded-lg 
-                                            tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                            " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                            <a class="popup-directions 
-                                            flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                            tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                            " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            `;
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    }
-                } else {
-                    if (horaire.length == 0) {   
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                                <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${location.image}" alt="${location.name}">
-                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                        <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                            <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                        </div>
-                                    </div>
-                                    <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                    <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                    <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                        <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">Aucune horaire indiquée</p>
-                                        <div class="flex flex-col items-start tablet:items-end">
-                                            <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                            <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                                <a class="popup-info 
-                                                flex justify-center items-center bg-white text-base font-bold
-                                                border-4 border-solid border-colorGreen rounded-lg 
-                                                tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                                " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                                <a class="popup-directions 
-                                                flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                                tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                                " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            `;
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    } else {
-                        marker.on('click', () => {
-                            selectedLocation.innerHTML = `
-                            <img class="popup-image w-full h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${location.image}" alt="${location.name}">
-                                <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
-                                <div class="flex justify-between items-start">
-                                    <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${location.name}</h2>
-                                    <div id="cross" class="flex items-center justify-center ml-[5px] w-8 h-8 rounded-full border-[.1rem] border-solid border-black cursor-pointer">
-                                        <i class="fa-solid fa-plus text-base rotate-45"></i>
-                                    </div>
-                                </div>
-                                <p class="popup-type mt-6 text-base">${location.typesNames.join(', ')}</p>
-                                <p class="popup-address mt-2 mb-4 text-base">${location.address}</p>
-                                <div class="flex flex-col tablet:flex-row tablet:items-end tablet:justify-between">
-                                    <p class="popup-horaire text-xl tablet:text-2xl font-semibold mb-3">${location.horaires}</p>
-                                    <div class="flex flex-col items-start tablet:items-end">
-                                        <p class="popup-description text-base font-medium text-colorOrange mb-3 desktop:mb-2">${location.description}</p>
-                                        <div class="flex flex-col justify-center w-full tablet:flex-row gap-4 tablet:gap-8">    
-                                            <a class="popup-info 
-                                            flex justify-center items-center bg-white text-base font-bold
-                                            border-4 border-solid border-colorGreen rounded-lg 
-                                            tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                                            " href="https://www.google.com/search?${location.info}" target="_blank">En savoir plus</a>
-                                            <a class="popup-directions 
-                                            flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
-                                            tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
-                                            " href="https://www.google.com/maps/place/${location.address}" target="_blank">Y aller</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            `;
-                            selectedLocation.classList.add('active');
-                            let cross = document.getElementById('cross');
-                            cross.addEventListener('click',  () => {
-                                selectedLocation.classList.remove('active');
-                            })
-                        })
-                    }
-                } 
+                marker.on('click', () => {
+                    displayLocation(image, name, typesNames, address, horaire, description, info)
+                })
             }
         })
     })
-
     window.addEventListener('load', addOptions);
 }
 
@@ -425,15 +169,19 @@ if (search) {
             if (location.name.toLowerCase().includes(searchValue.toLowerCase())) {
                 let name = location.name
                 let address = location.address
+                let image = location.image
+                let horaire = location.horaires
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
                 markers.push(marker);
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
-                
+                marker.on('click', () => {
+                    displayLocation(image, name, typesNames, address, horaire, description, info)
+                })
             }
-        })
+        }) 
     })
 }
 
@@ -452,9 +200,6 @@ for (let i = 0; i < filters.length; i++) {
         navbars[i].classList.toggle('active');
     }
 }
-
-let menu = document.getElementById('menu-btn');
-let filtre = document.getElementById('filtre')
 
 menu.onclick = () => {
     menu.classList.toggle('fa-times');
