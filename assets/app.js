@@ -33,7 +33,7 @@ function initMap() {
     marker.bindPopup("<b>Hello world!</b><br><a href='#'>I am a popup</a>.").openPopup();
 }
 
-let selectedLocation = document.querySelector('#location-content');
+let selectedLocation = document.getElementById('location-content');
 let filtre = document.getElementById('filtre')
 let menu = document.getElementById('menu-btn');
 let locations;
@@ -69,7 +69,7 @@ function displayLocation(image, name, typesNames, address, horaires, description
                 </div>
             </div>
         </section>
-    `;                  
+    `;
     selectedLocation.classList.add('active');
     let cross = document.getElementById('cross');
     cross.addEventListener('click',  () => {
@@ -105,6 +105,7 @@ function fetchData() {
                 marker.bindPopup(popup).openPopup();            
                 marker.on('click', () => {
                         displayLocation(image, name, typesNames, address, horaire, description, info)
+                        map.setView(marker.getLatLng(), 16);
                 })
             })
         })
@@ -149,6 +150,7 @@ if (select) {
                 marker.bindPopup(popup).openPopup();
                 marker.on('click', () => {
                     displayLocation(image, name, typesNames, address, horaire, description, info)
+                    map.setView(marker.getLatLng(), 16);
                 })
             }
         })
@@ -157,6 +159,9 @@ if (select) {
 }
 
 let search = document.getElementById("search");
+let locationInfo = document.getElementById("locations-info");
+let count = 0;
+
 if (search) {
     console.log(search)
     search.addEventListener('keyup', (event) => {
@@ -165,7 +170,13 @@ if (search) {
             map.removeLayer(marker);
         })
         markers = [];
-        locations.forEach((location) => {
+        locationInfo.classList.remove('active');
+        locationInfo.innerHTML = "";
+        let infoHTML = "";
+        let searchResults = count > 1 ? "Résultat trouvé" : "Résultats trouvés";
+        count = 0;
+
+        locations.forEach((location, index) => {
             if (location.name.toLowerCase().includes(searchValue.toLowerCase())) {
                 let image = location.image
                 let name = location.name
@@ -181,10 +192,45 @@ if (search) {
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
                 marker.on('click', () => {
-                    displayLocation(image, name, typesNames, address, horaire, description, info)
+                    displayLocation(image, name, typesNames, address, horaire, description, info);
+                    map.setView(marker.getLatLng(), 16);
                 })
+                if (!searchValue.trim()) {
+                    return;  
+                } else {
+                    infoHTML += `
+                        <div class="flex flex-col mx-[24px] bg-blue-500 rounded-lg pointer" data-index="${index}">
+                            <img class="popup-image w-full h-[141px] object-cover rounded-t-lg" src="${image ? image : require("../public/images/image-missing.png")}" alt="${location.name}">
+                            <div class="flex ml-4 mt-3">
+                                <p class="mr-4 text-5xl font-sans">${++count}</p>
+                                <div class="flex flex-col pr-3 pb-3">
+                                    <h2 class="text-xl mb-2">${name}</h2>
+                                    <p class="text-base">${typesNames}</p>
+                                    <a href="https://www.google.com/maps/place/${address}" target="_blank"class="text-base">${address}</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    locationInfo.classList.add('active');
+                }
             }
-        }) 
+        });
+        if (count === 0) {
+            infoHTML = `<div class="font-semibold">Aucun résultat trouvé</div>`;
+            locationInfo.classList.add('active');
+        } else {
+            infoHTML = `<div class="font-semibold">${count} ${searchResults}</div>` + infoHTML;
+        }
+        locationInfo.innerHTML = infoHTML;
+        locationInfo.addEventListener('click', (event) => {
+            const markerIndex = event.target.closest('[data-index]')?.getAttribute('data-index');
+            if (markerIndex !== null) {
+              markers[markerIndex].openPopup();
+              map.setView(markers[markerIndex].getLatLng(), 16);
+              filtre.classList.remove('active');
+              menu.classList.remove('fa-times');
+            }
+          });
     })
 }
 

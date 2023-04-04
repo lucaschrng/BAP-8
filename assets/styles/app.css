@@ -33,6 +33,17 @@ h1, h2 {
 #location-content.active {
     display: flex;
 }
+#locations-info {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#locations-info::-webkit-scrollbar {
+    display: none;
+}
+#locations-info.active {
+    display: flex;
+    flex-direction: column;
+}
 
 @media screen and (max-width: 1499px) {
     #menu-btn {
