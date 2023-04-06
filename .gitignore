@@ -21,8 +21,8 @@
 
 .idea/
 
-/public/uploads/locations
-!/public/uploads/locations/.gitkeep
+/public/uploads/
+!/public/uploads/images/locations/.gitkeep
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
