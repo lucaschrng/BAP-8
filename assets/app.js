@@ -172,7 +172,6 @@ if (search) {
         markers = [];
         locationInfo.classList.remove('active');
         locationInfo.innerHTML = "";
-        let infoHTML = "";
         let searchResults = count > 1 ? "Résultat trouvé" : "Résultats trouvés";
         count = 0;
 
@@ -211,7 +210,7 @@ if (search) {
                                     <a href="https://www.google.com/maps/place/${address}" target="_blank"class="text-base">${address}</a>
                                 </div>
                             </div>
-                    `
+                            `
                     locationInfo.appendChild(div);
                     locationInfo.classList.add('active');
                     div.addEventListener('click', () => {
@@ -219,11 +218,11 @@ if (search) {
                         divs.forEach((div) => {
                             div.style.backgroundColor = null;
                         })
-                        div.style.backgroundColor = '#FC6B3B'
+                        div.style.backgroundColor = '#FC6B3B';
                     })
+                }
             }
-            }
-        });
+        })
         if (count === 0) {
             locationInfo.innerHTML = `<div class="font-semibold">Aucun résultat trouvé</div>`;
             locationInfo.classList.add('active');
@@ -241,7 +240,7 @@ if (search) {
               filtre.classList.remove('active');
               menu.classList.remove('fa-times');
             }
-          });
+        })
     })
 }
 
