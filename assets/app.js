@@ -198,8 +198,10 @@ if (search) {
                 if (!searchValue.trim()) {
                     return;  
                 } else {
-                    infoHTML += `
-                        <div class="flex flex-col mx-[24px] bg-blue-500 rounded-lg pointer" data-index="${index}">
+                    const div = document.createElement('div');
+                    div.classList.add('result','flex', 'flex-col', 'mx-[24px]', 'bg-colorBlueGreen', 'rounded-lg', 'cursor-pointer');
+                    div.setAttribute('data-index', index);
+                    div.innerHTML = `
                             <img class="popup-image w-full h-[141px] object-cover rounded-t-lg" src="${image ? image : require("../public/images/image-missing.png")}" alt="${location.name}">
                             <div class="flex ml-4 mt-3">
                                 <p class="mr-4 text-5xl font-sans">${++count}</p>
@@ -209,19 +211,28 @@ if (search) {
                                     <a href="https://www.google.com/maps/place/${address}" target="_blank"class="text-base">${address}</a>
                                 </div>
                             </div>
-                        </div>
-                    `;
+                    `
+                    locationInfo.appendChild(div);
                     locationInfo.classList.add('active');
-                }
+                    div.addEventListener('click', () => {
+                        let divs = document.querySelectorAll('.result');
+                        divs.forEach((div) => {
+                            div.style.backgroundColor = null;
+                        })
+                        div.style.backgroundColor = '#FC6B3B'
+                    })
+            }
             }
         });
         if (count === 0) {
-            infoHTML = `<div class="font-semibold">Aucun résultat trouvé</div>`;
+            locationInfo.innerHTML = `<div class="font-semibold">Aucun résultat trouvé</div>`;
             locationInfo.classList.add('active');
         } else {
-            infoHTML = `<div class="font-semibold">${count} ${searchResults}</div>` + infoHTML;
+            const countMention = document.createElement('div');
+            countMention.classList.add('font-semibold');
+            countMention.innerHTML = `${count} ${searchResults}`;
+            locationInfo.insertBefore(countMention, locationInfo.firstChild);
         }
-        locationInfo.innerHTML = infoHTML;
         locationInfo.addEventListener('click', (event) => {
             const markerIndex = event.target.closest('[data-index]')?.getAttribute('data-index');
             if (markerIndex !== null) {

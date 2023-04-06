@@ -44,7 +44,9 @@ h1, h2 {
     display: flex;
     flex-direction: column;
 }
-
+#bg-color.active {
+    background-color: #FC6B3B;
+}
 @media screen and (max-width: 1499px) {
     #menu-btn {
         transition: .2s linear;
