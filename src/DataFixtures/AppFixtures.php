@@ -41,27 +41,147 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
-        $listnamesubtype = ["Services Municipaux", "Lieu Sportif", "Educations", "Santé", "Lieu Culturel"];
-        $listdescsubtype = ["description", "description", "description", "description", "description"];
+//        $listnamesubtype = ["Services Municipaux", "Lieu Sportif", "Educations", "Santé", "Lieu Culturel"];
+//        $listdescsubtype = ["description", "description", "description", "description", "description"];
+//
+//        $typeRepo = $manager->getRepository(Type::class);
+//        $alltype = $typeRepo->findAll();
+//
+//        $selectednumbertype = [6, ];
+//
+//        for($i = 1; $i<=5; $i++){
+//            for ($m = 1; $m<=4; $m++){
+//                $subtype = new Subtype();
+//                $subtype->setName($listnamesubtype[$i - 1]);
+//                $subtype->setDescription($listdescsubtype[$i - 1]);
+//                $subtype->setType($alltype[$i - 1]);
+//
+//                $manager->persist($subtype);
+//            }
+//        }
 
-        $typeRepo = $manager->getRepository(Type::class);
-        $alltype = $typeRepo->findAll();
+        $data = [
+            "services municipaux" => [
+                [
+                    "options" => [
+                        [
+                            "query" => "mairie",
+                            "option_name" => "carte électoral"
+                        ]
+                    ],
+                    "subcategory" => "senior"
+                ],
+                [
+                    "options" => [
+                        [
+                            "query" => "mairie",
+                            "option_name" => "passeport"
+                        ]
+                    ],
+                    "subcategory" => "famille"
+                ],
+                [
+                    "options" => [
+                        [
+                            "query" => "mairie",
+                            "option_name" => "recensement"
+                        ]
+                    ],
+                    "subcategory" => "jeune"
+                ],
+                [
+                    "options" => [
+                        [
+                            "query" => "mairie",
+                            "option_name" => "carte d’identité"
+                        ]
+                    ],
+                    "subcategory" => "nouvel habitant"
+                ]
+            ],
+            "santé" => [
+                [
+                    "options" => [],
+                    "subcategory" => "centres médicaux"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "planning familial"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "pharmacie"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "hôpitaux"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "médecin"
+                ]
+            ],
+            "lieu culturel" => [],
+            "éducations" => [
+                [
+                    "options" => [
+                        [
+                            "query" => "lycée",
+                            "option_name" => "lycée"
+                        ]
+                    ],
+                    "subcategory" => "-3 ans"
+                ],
+                [
+                    "options" => [
+                        [
+                            "query" => "école",
+                            "option_name" => "conseiller d’orientation"
+                        ]
+                    ],
+                    "subcategory" => "3-6 ans"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "6-10 ans"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "10-15 ans"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "+15 ans"
+                ]
+            ],
+            "lieux sportifs" => [
+                [
+                    "options" => [],
+                    "subcategory" => "sport d’équipe"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "sport individuel"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "sport d’interieur"
+                ],
+                [
+                    "options" => [],
+                    "subcategory" => "sport d’extérieur"
+                ]
+            ]
+        ];
 
-        $selectednumbertype = [6, ];
+        foreach ($data as $subtype => $options) {
+            $newSubtype = new Subtype();
+            $newSubtype->setName($subtype);
+            $newSubtype->setOptions($options);
 
-        for($i = 1; $i<=5; $i++){
-            for ($m = 1; $m<=4; $m++){
-                $subtype = new Subtype();
-                $subtype->setName($listnamesubtype[$i - 1]);
-                $subtype->setDescription($listdescsubtype[$i - 1]);
-                $subtype->setType($alltype[$i - 1]);
-
-                $manager->persist($subtype);
-            }
+            $manager->persist($newSubtype);
         }
+
         $manager->flush();
-
-
-
     }
 }

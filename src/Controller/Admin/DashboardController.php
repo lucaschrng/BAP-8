@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Subtype;
 use App\Entity\Type;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -28,6 +29,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('The Locations', 'fa fa-home');
+        yield MenuItem::linkToCrud('The Subtypes', 'fas fa-list', Subtype::class);
         yield MenuItem::linkToCrud('The Label', 'fas fa-list', Type::class);
     }
 }

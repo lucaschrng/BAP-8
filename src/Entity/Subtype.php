@@ -22,8 +22,11 @@ class Subtype
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'subTypes')]
-    private ?type $type = null;
+    #[ORM\ManyToOne(inversedBy: 'subtypes')]
+    private ?Type $type = null;
+
+    #[ORM\Column(nullable: true)]
+    private array $options = [];
 
     public function getId(): ?int
     {
@@ -54,14 +57,26 @@ class Subtype
         return $this;
     }
 
-    public function getType(): ?type
+    public function getType(): ?Type
     {
         return $this->type;
     }
 
-    public function setType(?type $type): self
+    public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?array $options): self
+    {
+        $this->options = $options;
 
         return $this;
     }

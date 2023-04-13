@@ -36,13 +36,13 @@ class Type
     #[Groups(['type:list', 'type:item'])]
     private Collection $locations;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: SubType::class)]
-    private Collection $subTypes;
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Subtype::class)]
+    private Collection $subtypes;
 
     public function __construct()
     {
         $this->locations = new ArrayCollection();
-        $this->subTypes = new ArrayCollection();
+        $this->subtypes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,29 +95,29 @@ class Type
     }
 
     /**
-     * @return Collection<int, SubType>
+     * @return Collection<int, Subtype>
      */
-    public function getSubTypes(): Collection
+    public function getSubtypes(): Collection
     {
-        return $this->subTypes;
+        return $this->subtypes;
     }
 
-    public function addSubType(SubType $subType): self
+    public function addSubtype(Subtype $subtype): self
     {
-        if (!$this->subTypes->contains($subType)) {
-            $this->subTypes->add($subType);
-            $subType->setType($this);
+        if (!$this->subtypes->contains($subtype)) {
+            $this->subtypes->add($subtype);
+            $subtype->setType($this);
         }
 
         return $this;
     }
 
-    public function removeSubType(SubType $subType): self
+    public function removeSubtype(Subtype $subtype): self
     {
-        if ($this->subTypes->removeElement($subType)) {
+        if ($this->subtypes->removeElement($subtype)) {
             // set the owning side to null (unless already changed)
-            if ($subType->getType() === $this) {
-                $subType->setType(null);
+            if ($subtype->getType() === $this) {
+                $subtype->setType(null);
             }
         }
 
