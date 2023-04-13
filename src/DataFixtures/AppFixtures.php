@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Location;
+use App\Entity\Subtype;
 use App\Entity\Type;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -39,5 +40,28 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+
+        $listnamesubtype = ["Services Municipaux", "Lieu Sportif", "Educations", "Santé", "Lieu Culturel"];
+        $listdescsubtype = ["description", "description", "description", "description", "description"];
+
+        $typeRepo = $manager->getRepository(Type::class);
+        $alltype = $typeRepo->findAll();
+
+        $selectednumbertype = [6, ];
+
+        for($i = 1; $i<=5; $i++){
+            for ($m = 1; $m<=4; $m++){
+                $subtype = new Subtype();
+                $subtype->setName($listnamesubtype[$i - 1]);
+                $subtype->setDescription($listdescsubtype[$i - 1]);
+                $subtype->setType($alltype[$i - 1]);
+
+                $manager->persist($subtype);
+            }
+        }
+        $manager->flush();
+
+
+
     }
 }
