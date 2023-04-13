@@ -28,16 +28,18 @@
                         </div>
                     </div>
                     <div id="locations-info" class="w-full pb-4 gap-y-[24px] hidden overflow-auto items-center" ></div>
-                    <div class="w-[280px] tablet:w-[300px] overflow-auto hidden">
+                    <div class="w-[280px] tablet:w-[300px] overflow-auto">
                         {% for type in types %}
                         <div class="grid gap-[10px] mb-[5px]">
-                            <div class="flex">
-                                <i id="filter-btn-{{ loop.index }}" class="fa-solid fa-plus text-[16px] self-center mr-[10px]"></i>
+                            <div class="flex items-center">
+                                <div id="filter-btn-{{ loop.index }}" class="flex justify-center items-center bg-white w-8 h-8 rounded-lg self-center mr-[10px] cursor-pointer">
+                                    <div id="isCheck-{{ loop.index }}" class="w-6 h-6 rounded-[5px] bg-[#FC6B3B] hidden"></div>
+                                </div>
                                 <p class="text-[16px]">{{ type }}</p>
                             </div>
                             <div id="navbar-{{ loop.index }}" class="flex flex-col gap-[10px] relative top-0 right-0 mb-[5px]">
                                 {% for location in type.locations %}
-                                    <li class="ml-[30px] mr-[5px] hidden"> {{ location }} </li>
+                                    <li class="ml-[30px] mr-[5px] before:text-red-500 list-outside hidden"> {{ location }} </li>
                                 {% endfor %}
                             </div>
                         {% endfor %}

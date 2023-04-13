@@ -252,11 +252,12 @@ window.addEventListener('load', initMap);
 
 let filters = document.querySelectorAll('[id^="filter-btn-"]');
 let navbars = document.querySelectorAll('[id^="navbar-"]');
-
+let check = document.querySelectorAll('[id^="isCheck-"]');
 for (let i = 0; i < filters.length; i++) {
     filters[i].onclick = () => {
-       filters[i].classList.toggle('fa-times');
+       filters[i].classList.toggle('active');
         navbars[i].classList.toggle('active');
+        check[i].classList.toggle('active');
     }
 }
 

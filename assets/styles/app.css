@@ -12,12 +12,17 @@ h1, h2 {
     font-weight: 400;
     font-style: normal;
 }
-[id^="filter-btn-"] {
-    transition: .3s linear;
+[id^="isCheck-"].active {
+    display: block;
+    animation: isVisible .3s linear;
 }
-[id^="filter-btn-"].fa-times{
-    transform: rotate(180deg);
-    transition: .3s linear;
+@keyframes isVisible {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 [id^="navbar-"] {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
