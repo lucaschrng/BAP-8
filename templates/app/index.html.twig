@@ -3,14 +3,14 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center p-24 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh]   object-contain">
+    <div class="flex flex-col items-center justify-center p-24 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-10">
         <h1 class="font-bold font-sans text-[64px] text-[#FFFAE8]">Que recherchez-vous ?</h1>
         <p class="text-xl text-white font-txt">Cela nous aidera à faire un premier filtre pour vous aider</p>
         <div class="flex flex-row justify-center mt-10">
             {% for type in types|slice(0,5) %}
-                <div class="flex flex-col mx-10 px-5">
-                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="w-80 h-80 object-contain opacity-50 hover:opacity-100 cursor-pointer">
-                    <p class="font-txt text-center text-[32px] text-white">{{ type }}</p>
+                <div class="flex flex-col mx-10 px-5 tablet:mx-2 p-0">
+                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="w-80 h-80 object-contain opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-80 h-80">
+                    <p class="font-txt text-center text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
                 </div>
             {% endfor %}
         </div>
