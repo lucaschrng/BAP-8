@@ -3,28 +3,32 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center p-24 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-10">
-        <h1 class="font-bold font-sans text-[64px] text-[#FFFAE8]">Que recherchez-vous ?</h1>
-        <p class="text-xl text-white font-txt">Cela nous aidera à faire un premier filtre pour vous aider</p>
-        <div class="flex flex-row justify-center mt-10">
+    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-8">
+        <h1 class="font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h1>
+        <p class="desktop:text-xl text-white font-txt tablet:text-[16px]">Cela nous aidera à faire un premier filtre pour vous aider</p>
+        <div class="flex flex-row justify-center desktop:mt-10 tablet:mt-0">
             {% for type in types|slice(0,5) %}
-                <div class="flex flex-col mx-10 px-5 tablet:mx-2 p-0">
-                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="w-80 h-80 object-contain opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-80 h-80">
-                    <p class="font-txt text-center text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+                <div class="flex flex-col desktop:mx-10 px-5 tablet:mx-2 p-0">
+                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
                 </div>
             {% endfor %}
         </div>
         <div class="flex flex-row items-center justify-center m-5">
             <div class="items-center justify-center">
-                <p class="font-txt text-center text-white">Etape</p>
+                <p class="font-txt text-center text-white tablet:text-[16px]">Etape</p>
                 <div class="pt-2"></div>
-                <div class="flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">1</div>
+                <div class="flex items-center justify-center desktop:w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold tablet:w-16 h-16 text-4xl">1</div>
                 <div class="pb-7"></div>
             </div>
             <div class="flex items-center justify-center text-white text-xl">------</div>
-            <div class="flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+            <div class="flex items-center justify-center desktop:w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C] tablet:w-12 h-12"></div>
             <div class="flex items-center justify-center text-white text-xl">------</div>
-            <div class="flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+            <div class="flex items-center justify-center desktop:w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C] tablet:w-12 h-12"></div>
+        </div>
+        <div class="desktop:hidden tablet:flex flex-col items-center justify-center text-white">
+            <p class="text-[16px]">Allez directement à la carte interactive</p>
+            <i class="fa-solid fa-chevron-down"></i>
         </div>
     </div>
 
