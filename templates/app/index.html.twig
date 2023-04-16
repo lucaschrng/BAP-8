@@ -3,12 +3,12 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-8">
+    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-10">
         <h1 class="font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h1>
         <p class="desktop:text-xl text-white font-txt tablet:text-[16px]">Cela nous aidera à faire un premier filtre pour vous aider</p>
         <div class="flex flex-row justify-center desktop:mt-10 tablet:mt-0">
             {% for type in types|slice(0,5) %}
-                <div class="flex flex-col desktop:mx-10 px-5 tablet:mx-2 p-0">
+                <div class="flex flex-col desktop:mx-20 px-16 tablet:mx-2 px-[39px]">
                     <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
                     <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
                 </div>
