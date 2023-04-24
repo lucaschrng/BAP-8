@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Location;
+use App\Form\DayFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -29,7 +31,10 @@ class LocationCrudController extends AbstractCrudController
                 ->setBasePath('uploads/images/locations/')
                 ->setUploadDir('public/uploads/images/locations/')
                 ->setUploadedFileNamePattern('[randomhash].[extension]'),
-            AssociationField::new('types')
+            AssociationField::new('types'),
+            CollectionField::new('horaires')
+                ->setLabel('Horaires')
+                ->setEntryType(DayFormType::class)
         ];
     }
 }
