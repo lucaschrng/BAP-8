@@ -61,12 +61,12 @@ h1, h2 {
         transition: .2s linear;
     }
     #filtre {
-        display: flex;
         clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
         transition: .3s ease-out;
         opacity:0%;
     }
     #filtre.active {
+        display: flex;
         clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%); 
         transition: .4s ease-out;  
         opacity: 100%;              
