@@ -11,10 +11,12 @@
                 <div id="left-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[96px]">
                     {% for location in locations|slice(0,5) %}
                         <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
                     {% endfor %}
                 </div>
                 <div id="right-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[20px]">
                     {% for location in locations|slice(0,5) %}
+                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
                         <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
                     {% endfor %}
                 </div>
@@ -32,13 +34,17 @@
                         {% for subtype in subtypes %}
                             <div class="flex flex-col justify-start items-center">
                                 <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]"></div>
-                                <p class="font-medium">{{ subtype.name }}</p>
+                                <p class="font-medium mt-4">{{ subtype.name }}</p>
                             </div>
                         {% endfor %}
                     </div>
                     <div class="flex justify-between">
-                        <div class="flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
-                        <div class="flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                        <a href="#map">
+                            <div class="flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
+                        </a>
+                        <a href="#map">
+                            <div class="flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                        </a>
                     </div>
                 </div>
             </div>
