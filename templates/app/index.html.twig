@@ -3,35 +3,164 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-10">
-        <h1 class="font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h1>
+    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-[50px]">
+        <h2 class="mainTitle font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h2>
         <p class="desktop:text-xl text-white font-txt tablet:text-[16px]">Cela nous aidera à faire un premier filtre pour vous aider</p>
-        <div class="flex flex-row justify-center desktop:mt-10 tablet:mt-0">
+        <div class="selectFilter flex flex-row justify-center desktop:mt-4 tablet:mt-0">
             {% for type in types|slice(0,5) %}
-                <div class="flex flex-col desktop:mx-20 px-16 tablet:mx-2 px-[39px]">
-                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
+                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
+                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
                     <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
                 </div>
             {% endfor %}
         </div>
-        <div class="flex flex-row items-center justify-center m-5">
-            <div class="items-center justify-center">
-                <p class="font-txt text-center text-white tablet:text-[16px]">Etape</p>
-                <div class="pt-2"></div>
-                <div class="flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">1</div>
-                <div class="pb-7"></div>
+        <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
+            <div class="selectedStep items-center justify-center">
+                <p class="stepText font-txt text-center text-white tablet:text-[16px]">Etape</p>
+                <div class="someClass pt-2"></div>
+                <div class="stepBall flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">1</div>
+                <div class="someOtherClass pb-7"></div>
             </div>
-            <div class="flex items-center justify-center text-white text-xl">------</div>
-            <div class="flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
-            <div class="flex items-center justify-center text-white text-xl">------</div>
-            <div class="flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+            <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+            <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+            <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+            <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
         </div>
-        <div class="desktop:hidden tablet:flex flex-col items-center justify-center text-white">
-            <p class="text-[16px] font-txt">Allez directement à la carte interactive</p>
+        <div class="secondaryBlock desktop:hidden tablet:flex flex-col items-center justify-center text-white">
+            <p class="redirectionMap text-[16px] font-txt">Allez directement à la carte interactive</p>
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </div>
 
+    <script>
+        console.log("JavaScript file loaded!");
+
+        const titleMain = document.querySelector(".mainTitle");
+        const filterSelect = document.querySelector(".selectFilter");
+        const stepTwo = document.querySelector(".filterImg");
+        const stepMenu = document.querySelector("#stepMenu");
+        const backStep = document.querySelector(".stepBack");
+        const stepThree = document.querySelector("#stepThree");
+
+        function goToStep1() {
+            titleMain.innerText = "Que recherchez-vous ?";
+            filterSelect.innerHTML = `
+    <div class="filter">
+    <img src="src/img/querecherchezvous/servicemunicipaux.png" alt="Services Municipaux" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
+    <p class="category">Services <br> Municipaux</p>
+    </div>
+    <div class="filter">
+    <img src="src/img/querecherchezvous/lieuxsportifs.png" alt="Lieux Sportifs" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
+    <p class="category">Lieux <br> Sportifs</p>
+    </div>
+    <div class="filter">
+    <img src="src/img/querecherchezvous/lieuxculturels.png" alt="Lieux Culturels" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
+    <p class="category">Lieux <br> Culturels</p>
+    </div>
+    <div class="filter">
+    <img src="src/img/querecherchezvous/santes.png" alt="Santés" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
+    <p class="category">Santés</p>
+    </div>
+    <div class="filter">
+    <img src="src/img/querecherchezvous/educations.png" alt="Educations" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
+    <p class="category">Educations</p>
+    </div>
+    `;
+            stepMenu.innerHTML = `
+        <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
+            <div class="selectedStep items-center justify-center">
+                <p class="stepText font-txt text-center text-white tablet:text-[16px]">Etape</p>
+                <div class="someClass pt-2"></div>
+                <div class="stepBall flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">1</div>
+                <div class="someOtherClass pb-7"></div>
+            </div>
+            <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+            <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+            <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+            <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+        </div>
+`;
+        }
+
+        function goToStep2() {
+            titleMain.innerText = "Qui êtes-vous ?";
+            filterSelect.innerHTML = `
+    <div class="filter" id="stepThree">
+        <img src="src/img/quietesvous/nouvelhabitant.png" alt="Nouvel Habitant" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
+        <p class="category">Nouvel <br> Habitant</p>
+    </div>
+    <div class="filter">
+        <img src="src/img/quietesvous/jeune.png" alt="Jeune" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
+        <p class="category">Jeune</p>
+    </div>
+    <div class="filter">
+        <img src="src/img/quietesvous/famille.png" alt="Famille" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
+        <p class="category">Famille</p>
+    </div>
+    <div class="filter">
+        <img src="src/img/quietesvous/senior.png" alt="Senior" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
+        <p class="category">Senior</p>
+    </div>
+    `;
+            stepMenu.innerHTML = `
+    <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
+    <div class="stepBack flex flex-col items-center justify-between text-white font-[bold] text-[32px] cursor-pointer px-10 py-[5px] rounded-[10px] border-solid border-[#E86336]" onclick="goToStep1()">
+    <p class="stepBackBtn">Etape Précédente</p>
+    </div>
+    <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+    <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+    <div class="selectedStep items-center justify-center">
+    <p class="stepText font-txt text-center text-white tablet:text-[16px]">Etape</p>
+    <div class="someClass pt-2"></div>
+    <div class="stepBall flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">2</div>
+    <div class="someOtherClass pb-7"></div>
+    </div>
+    <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+    <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+    </div>
+`;
+        }
+
+        function goToStep3() {
+            titleMain.innerText = "Que voulez-vous faire ?";
+            filterSelect.innerHTML = `
+    <div class="filter">
+        <img src="src/img/quevoulezvousfaire/carteidentite.png" alt="Carte identité" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
+        <p class="category">Carte <br> identité</p>
+    </div>
+    <div class="filter">
+        <img src="src/img/quevoulezvousfaire/passport.png" alt="Passport" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
+        <p class="category">Passport</p>
+    </div>
+    <div class="filter">
+        <img src="src/img/quevoulezvousfaire/recensement.png" alt="Recensement" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
+        <p class="category">Recensement</p>
+    </div>
+    <div class="filter">
+        <img src="src/img/quevoulezvousfaire/carteelectoral.png" alt="Carte Electoral" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
+        <p class="category">Carte Electoral</p>
+    </div>
+    `;
+            stepMenu.innerHTML = `
+    <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
+    <div class="stepBack flex flex-col items-center justify-between text-white font-[bold] text-[32px] cursor-pointer px-10 py-[5px] rounded-[10px] border-solid border-[#E86336]" onclick="goToStep2()">
+        <p class="stepBackBtn">Etape Précédente</p>
+    </div>
+    <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+    <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+    <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+    <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+    <div class="selectedStep items-center justify-center">
+    <p class="stepText font-txt text-center text-white tablet:text-[16px]">Etape</p>
+    <div class="someClass pt-2"></div>
+    <div class="stepBall flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">3</div>
+    <div class="someOtherClass pb-7"></div>
+    </div>
+    </div>
+`;
+        }
+
+    </script>
     <div id="map" style="height: 400px; width: 100%"></div>
     <label for="type">Type de lieu</label>
     <select name="type" id="type">
