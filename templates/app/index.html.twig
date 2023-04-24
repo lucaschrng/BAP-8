@@ -4,12 +4,34 @@
 
 {% block body %}
     <div class="flex flex-col">
-        <section class="bg-red-500 h-[100vh]">
+        <section class="h-[100vh]">
+            <div class="flex flex-col ml-[112px]">
+                <div class="flex justify-between mr-[96px] mt-[60px]">
+                    <div></div>
+                    <img class="w-[180px] h-[116px]" src="/images/logo.png" alt="Plessis-Robinson logo">
+                </div>
+                <div class="mr-[260px]">
+                    <h1 class="text-colorBlueGreen text-[64px] mb-[120px]">Le Plessis-Robinson vous guide !</h1>
+                    <h2 class="text-[32px] mb-[36px]">Que recherchez-vous ?</h2>
+                    <div class="flex flex-row gap-[29px] mb-[70px]">
+                        {% for subtype in subtypes %}
+                            <div class="flex flex-col justify-center items-center">
+                                <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]"></div>
+                                <p class="font-medium">{{ subtype.name }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
+                        <div class="flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section class="flex flex-col">
             {# Menu #}
             <section class="flex flex-row items-center justify-between bg-colorGreen w-full h-[56px] tablet:h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
-                <h1 class="text-[24px] tablet:text-[32px]"> Cartes Interactive </h1>
+                <h2 class="text-[24px] tablet:text-[32px]"> Cartes Interactive </h2>
                 <div id="menu-btn" class="fas fa-bars text-[2rem] cursor-pointer"></div>
             </section>
             <div class="flex flex-row-reverse desktop:flex-row relative">
