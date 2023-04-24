@@ -3,6 +3,8 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
+    <section class="bg-red-500 h-[100vh]">
+    </section>
     <section>
         <div class="flex flex-col">
             {# Menu #}
@@ -28,7 +30,7 @@
                         </div>
                     </div>
                     <div id="locations-info" class="w-full pb-4 gap-y-[24px] hidden overflow-auto items-center" ></div>
-                    <div class="w-[280px] tablet:w-[300px] overflow-auto">
+                    <div class="w-[280px] tablet:w-[300px] overflow-auto hidden">
                         {% for type in types %}
                         <div class="grid gap-[10px] mb-[5px]">
                             <div class="flex items-center">
