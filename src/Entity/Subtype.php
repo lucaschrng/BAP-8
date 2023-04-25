@@ -28,6 +28,9 @@ class Subtype
     #[ORM\Column(nullable: true)]
     private array $options = [];
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image_url = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class Subtype
     public function setOptions(?array $options): self
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->image_url;
+    }
+
+    public function setImageUrl(?string $image_url): self
+    {
+        $this->image_url = $image_url;
 
         return $this;
     }
