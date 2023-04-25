@@ -7,21 +7,21 @@
         {# Main section #}
         <section class="h-[100vh] w-full flex flex-row">
             {# Carousel #}
-            <div class="h-[100vh] flex overflow-hidden">
-                <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px]">
+            <div class="h-[100vh] w-full flex overflow-hidden">
+                <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px] w-[326px]">
                     {% for location in locations|slice(0,5) %}
-                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                        <img class="object-cover rounded-[10px] h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
                     {% endfor %}
                     {% for location in locations|slice(0,5) %}
-                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                        <img class="object-cover rounded-[10px] h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
                     {% endfor %}
                 </div>
-                <div id="right-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[20px]">
-                    {% for location in locations|slice(0,5) %}
-                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
+                <div id="right-carousel" class="flex flex-col gap-[30px] ml-[20px] w-[326px]">
+                    {% for location in locations|slice(5,9) %}
+                        <img class="object-cover rounded-[10px] h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">    
                     {% endfor %}
-                    {% for location in locations|slice(0,5) %}
-                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
+                    {% for location in locations|slice(5,9) %}
+                        <img class="object-cover rounded-[10px] h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">    
                     {% endfor %}
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <h2 class="text-[32px] mb-[36px]">Que recherchez-vous ?</h2>
                     <div class="flex flex-row gap-[28px] mb-[70px]">
                         {% for subtype in subtypes %}
-                            <div class="subtype flex flex-col justify-start items-center">
+                            <div class="flex flex-col justify-start items-center">
                                 <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]"></div>
                                 <p class="font-medium mt-4">{{ subtype.name }}</p>
                             </div>
