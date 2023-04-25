@@ -5,9 +5,9 @@
 {% block body %}
     <div class="flex flex-col">
         {# Main section #}
-        <section class="tablet:h-[400px] desktop:h-[100vh] flex flex-row">
+        <section class="h-[100vh] tablet:h-[545px] desktop:h-[100vh] flex flex-row overflow-hidden">
             {# Carousel #}
-            <div class="h-[100vh] w-full overflow-hidden hidden desktop:flex desktop:mr-[40px] min-[1600px]:mr-[112px]">
+            <div class="h-[100vh] w-full hidden desktop:flex desktop:mr-[40px] min-[1600px]:mr-[112px]">
                 <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px]">
                     {% for location in locations|slice(0,5) %}
                         <img class="object-cover rounded-[10px] min-w-[256px] max-[1900px]:min-w-[326px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
@@ -26,39 +26,43 @@
                 </div>
             </div>
             {# Main content #}
-            <div class="flex flex-col ml-5 desktop:m-0 w-full">
-                <div class="flex justify-between mr-[20px] desktop:mr-[96px] tablet:mt-[40px] desktop:mt-[60px]">
+            <div class="flex flex-col pl-[18px] tablet:pl-[25px] desktop:pl-0 w-full">
+                <div class="flex justify-between mr-[22px] mt-[65px] tablet:mr-[20px] desktop:mr-[96px] tablet:mt-[60px] desktop:mt-[60px]">
                     <div></div>
-                    <img class="tablet:w-[123px] h-[79px] desktop:w-[180px] h-[116px]" src="/images/logo.png" alt="Plessis-Robinson logo">
+                    <img class="w-[64px] h-[41px] tablet:w-[123px] tablet:h-[79px] desktop:w-[180px] desktop:h-[116px]" src="/images/logo.png" alt="Plessis-Robinson logo">
                 </div>
-                <div class="flex flex-col mr-[260px]">
-                    <h1 class="text-colorBlueGreen tablet:mb-6 desktop:mb-[120px] tablet:text-[48px] desktop:text-[64px] tablet:mt-[40px] desktop:m-0 break-words tablet:w-[650px] desktop:w-full leading-[44px]">Le Plessis-Robinson vous guide !</h1>
-                    <h2 class="text-[32px] mb-[36px] hidden desktop:block">Que recherchez-vous ?</h2>
-                    <p class="tablet:mb-6 block desktop:hidden w-[620px]">Retrouvez où faire vos démarches facilement avec notre carte interactive.</p>
-                    <div class="flex flex-row gap-[28px] mb-[70px] tablet:hidden desktop:flex">
+                <div class="flex flex-col desktop:mr-[260px]">
+                    <h1 class="text-colorBlueGreen tablet:mb-[23px] desktop:mb-[120px] text-[32px] tablet:text-[48px] desktop:text-[64px] mt-2 tablet:mt-[72px] desktop:m-0 break-words w-[350px] tablet:w-[650px] desktop:w-full leading-[44px] leading-normal">Le Plessis-Robinson vous guide !</h1>
+                    <p class="mb-8 tablet:mb-6 block desktop:hidden w-[350px] tablet:w-[580px] desktop:m-0 break-words">Retrouvez où faire vos démarches facilement avec notre carte interactive.</p>
+                    <h2 class="text-[24px] tablet:text-[32px] mb-4 desktop:mb-[36px] block tablet:hidden desktop:block">Que recherchez-vous ?</h2>
+                    <div class="flex tablet:hidden desktop:flex desktop:flex-row flex-wrap desktop:flex-nowrap gap-4 tablet:gap-7 mb-4 tablet:mb-[70px] p-5 tablet:p-0 justify-center items-center">
                         {% for subtype in subtypes %}
-                            <div class="subtype flex flex-col justify-start items-center">
-                                <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                            <div class="subtype flex flex-col justify-start items-center w-[154px] desktop:w-[131px] h-full">
+                                <div class="bg-red-500 w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
                                 
                                 </div>
-                                <p class="font-medium mt-4">{{ subtype.name }}</p>
+                                <p class="font-medium mt-2 tablet:mt-4 text-xs desktop:text-base text-center">{{ subtype.name }}</p>
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="flex justify-between">
-                        <a href="#map">
-                            <div class="flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
+                    <div class="flex desktop:justify-between tablet:mb-[50px] desktop:m-0">
+                        <a href="#map" class="hidden desktop:flex">
+                            <div class="hidden desktop:flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
                         </a>
-                        <a href="#map">
-                            <div class="hidden desktop:flex flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                        <a href="#map" class="hidden desktop:flex">
+                            <div class="flex tablet:hidden desktop:flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                        </a>
+                        <a href="#map" class="tablet:flex desktop:hidden">
+                            <div class="tablet:flex desktop:hidden justify-center items-center w-[237px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Carte Interactive</div>
                         </a>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="h-[50vh] bg-red-500 flex desktop:hidden">
+
+        <section class="h-[50vh] bg-red-500 hidden tablet:flex desktop:hidden">
         </section>
-        <section class="h-[20vh] flex desktop:hidden">
+        <section class="h-[20vh] hidden tablet:flex desktop:hidden">
         </section>
         {# Map section #}
         <section class="flex flex-col">
