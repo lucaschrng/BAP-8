@@ -282,7 +282,9 @@ const subtypesQueries = [
         'Crèche',
         'Lycée',
         'Ecole maternelle et élémentaire',
-        'Ecole maternelle', 'Collèges',
+        'Ecole maternelle',
+        'Collèges',
+        'Ecole élémentaire',
         'Centre de loisirs maternel',
         'Accueil périscolaire maternel',
         'Enfance'
@@ -315,6 +317,18 @@ subtypes.forEach((subtype, index) => {
                   map.setView(marker.getLatLng(), 16);
               })
           }
+      })
+  })
+})
+
+const filtersDiv = document.querySelectorAll('.filter-div');
+subtypes.forEach((subtype, index) => {
+  subtype.addEventListener('click', () => {
+        filtersDiv.forEach((filterDiv) => {
+            if (filterDiv.children[0].classList.contains('active')) filterDiv.children[0].click();
+        })
+      filtersDiv.forEach((filterDiv) => {
+          if (subtypesQueries[index].includes(filterDiv.children[1].textContent)) filterDiv.children[0].click();
       })
   })
 })
