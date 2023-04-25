@@ -45,26 +45,12 @@
         function goToStep1() {
             titleMain.innerText = "Que recherchez-vous ?";
             filterSelect.innerHTML = `
-    <div class="filter">
-    <img src="src/img/querecherchezvous/servicemunicipaux.png" alt="Services Municipaux" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-    <p class="category">Services <br> Municipaux</p>
-    </div>
-    <div class="filter">
-    <img src="src/img/querecherchezvous/lieuxsportifs.png" alt="Lieux Sportifs" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-    <p class="category">Lieux <br> Sportifs</p>
-    </div>
-    <div class="filter">
-    <img src="src/img/querecherchezvous/lieuxculturels.png" alt="Lieux Culturels" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-    <p class="category">Lieux <br> Culturels</p>
-    </div>
-    <div class="filter">
-    <img src="src/img/querecherchezvous/santes.png" alt="Santés" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-    <p class="category">Santés</p>
-    </div>
-    <div class="filter">
-    <img src="src/img/querecherchezvous/educations.png" alt="Educations" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-    <p class="category">Educations</p>
-    </div>
+             {% for type in types|slice(0,5) %}
+                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
+                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+                </div>
+            {% endfor %}
     `;
             stepMenu.innerHTML = `
         <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
@@ -85,22 +71,12 @@
         function goToStep2() {
             titleMain.innerText = "Qui êtes-vous ?";
             filterSelect.innerHTML = `
-    <div class="filter" id="stepThree">
-        <img src="src/img/quietesvous/nouvelhabitant.png" alt="Nouvel Habitant" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
-        <p class="category">Nouvel <br> Habitant</p>
-    </div>
-    <div class="filter">
-        <img src="src/img/quietesvous/jeune.png" alt="Jeune" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
-        <p class="category">Jeune</p>
-    </div>
-    <div class="filter">
-        <img src="src/img/quietesvous/famille.png" alt="Famille" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
-        <p class="category">Famille</p>
-    </div>
-    <div class="filter">
-        <img src="src/img/quietesvous/senior.png" alt="Senior" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
-        <p class="category">Senior</p>
-    </div>
+            {% for type in types|slice(0,5) %}
+                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
+                    <img src="{{ asset('images/querecherchezvous/santes.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+                </div>
+            {% endfor %}
     `;
             stepMenu.innerHTML = `
     <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
@@ -124,22 +100,12 @@
         function goToStep3() {
             titleMain.innerText = "Que voulez-vous faire ?";
             filterSelect.innerHTML = `
-    <div class="filter">
-        <img src="src/img/quevoulezvousfaire/carteidentite.png" alt="Carte identité" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
-        <p class="category">Carte <br> identité</p>
-    </div>
-    <div class="filter">
-        <img src="src/img/quevoulezvousfaire/passport.png" alt="Passport" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
-        <p class="category">Passport</p>
-    </div>
-    <div class="filter">
-        <img src="src/img/quevoulezvousfaire/recensement.png" alt="Recensement" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
-        <p class="category">Recensement</p>
-    </div>
-    <div class="filter">
-        <img src="src/img/quevoulezvousfaire/carteelectoral.png" alt="Carte Electoral" class="filterImg desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40">
-        <p class="category">Carte Electoral</p>
-    </div>
+            {% for type in types|slice(0,5) %}
+                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
+                    <img src="{{ asset('images/querecherchezvous/educations.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40"">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+                </div>
+            {% endfor %}
     `;
             stepMenu.innerHTML = `
     <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
