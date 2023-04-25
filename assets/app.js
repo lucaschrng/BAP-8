@@ -272,3 +272,49 @@ close.onclick = () => {
     filtre.classList.remove('active');
     menu.classList.remove('fa-times');
 }
+
+const subtypes = document.querySelectorAll('.subtype');
+const subtypesQueries = [
+    ['Services municipaux'],
+    ['Hopitaux'],
+    ['Lieux de culte', 'Equipements culturels'],
+    [
+        'Crèche',
+        'Lycée',
+        'Ecole maternelle et élémentaire',
+        'Ecole maternelle', 'Collèges',
+        'Centre de loisirs maternel',
+        'Accueil périscolaire maternel',
+        'Enfance'
+    ],
+    ['Installations sportives']];
+
+subtypes.forEach((subtype, index) => {
+  subtype.addEventListener('click', () => {
+      markers.forEach((marker) => {
+          map.removeLayer(marker);
+      })
+      markers = [];
+      locations.forEach((location) => {
+          if (location.typesNames.some((type) => subtypesQueries[index].includes(type))) {
+              let image = location.image
+              let name = location.name
+              let typesNames = location.typesNames.join(', ')
+              let address = location.address
+              let horaire = location.horaires
+              let description = location.description
+              let info = location.info
+              let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
+              let popup = L.popup().setContent(popupContent);
+              let marker = L.marker([location.latitude, location.longitude]);
+              markers.push(marker);
+              marker.addTo(map);
+              marker.bindPopup(popup).openPopup();
+              marker.on('click', () => {
+                  displayLocation(image, name, typesNames, address, horaire, description, info)
+                  map.setView(marker.getLatLng(), 16);
+              })
+          }
+      })
+  })
+})
