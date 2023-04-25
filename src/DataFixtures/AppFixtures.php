@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
 //        }
 
         $data = [
-            "services municipaux" => [
+            "Services municipaux" => [
                 [
                     "options" => [
                         [
@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
                     "subcategory" => "nouvel habitant"
                 ]
             ],
-            "santé" => [
+            "Santé" => [
                 [
                     "options" => [],
                     "subcategory" => "centres médicaux"
@@ -129,8 +129,8 @@ class AppFixtures extends Fixture
                     "subcategory" => "médecin"
                 ]
             ],
-            "lieu culturel" => [],
-            "éducations" => [
+            "Lieu culturel" => [],
+            "Educations" => [
                 [
                     "options" => [
                         [
@@ -162,7 +162,7 @@ class AppFixtures extends Fixture
                     "subcategory" => "+15 ans"
                 ]
             ],
-            "lieux sportifs" => [
+            "Lieux sportifs" => [
                 [
                     "options" => [],
                     "subcategory" => "sport d’équipe"
