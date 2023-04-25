@@ -41,7 +41,7 @@ let markers = [];
 
 function displayLocation(image, name, typesNames, address, horaires, description, info) {
     selectedLocation.innerHTML = `
-        <img class="popup-image w-[100vw] h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${image ? require(`../public/uploads/images/locations/${image}`) : require("../public/images/image-missing.png")}" alt="${location.name}">
+        <img class="popup-image w-[100vw] h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${image ? require(`${image}`) : require("../public/images/image-missing.png")}" alt="${location.name}">
         <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
             <div class="flex justify-between items-start">
                 <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${name}</h2>
@@ -299,23 +299,23 @@ subtypes.forEach((subtype, index) => {
       markers = [];
       locations.forEach((location) => {
           if (location.typesNames.some((type) => subtypesQueries[index].includes(type))) {
-              let image = location.image
-              let name = location.name
-              let typesNames = location.typesNames.join(', ')
-              let address = location.address
-              let horaire = location.horaires
-              let description = location.description
-              let info = location.info
-              let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
-              let popup = L.popup().setContent(popupContent);
-              let marker = L.marker([location.latitude, location.longitude]);
-              markers.push(marker);
-              marker.addTo(map);
-              marker.bindPopup(popup).openPopup();
-              marker.on('click', () => {
-                  displayLocation(image, name, typesNames, address, horaire, description, info)
-                  map.setView(marker.getLatLng(), 16);
-              })
+                let image = location.image
+                let name = location.name
+                let typesNames = location.typesNames.join(', ')
+                let address = location.address
+                let horaire = location.horaires
+                let description = location.description
+                let info = location.info
+                let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
+                let popup = L.popup().setContent(popupContent);
+                let marker = L.marker([location.latitude, location.longitude]);
+                markers.push(marker);
+                marker.addTo(map);
+                marker.bindPopup(popup).openPopup();
+                marker.on('click', () => {
+                    displayLocation(image, name, typesNames, address, horaire, description, info)
+                    map.setView(marker.getLatLng(), 16);
+                })
           }
       })
   })
