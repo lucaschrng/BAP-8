@@ -7,27 +7,31 @@
         {# Main section #}
         <section class="h-[100vh] w-full flex flex-row">
             {# Carousel #}
-            <div class="h-[100vh] flex overflow-hidden">
-                <div id="left-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[96px]">
+            <div class="h-[100vh] w-full overflow-hidden hidden desktop:flex">
+                <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px]">
                     {% for location in locations|slice(0,5) %}
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                        <img class="object-cover rounded-[10px] min-w-[226px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
+                    {% endfor %}
+                    {% for location in locations|slice(0,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[226px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
                     {% endfor %}
                 </div>
-                <div id="right-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[20px]">
-                    {% for location in locations|slice(0,5) %}
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                <div id="right-carousel" class="flex flex-col gap-[30px] ml-[20px] max-[1900px]:hidden">
+                    {% for location in locations|slice(5,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[226px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">    
+                    {% endfor %}
+                    {% for location in locations|slice(5,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[226px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">    
                     {% endfor %}
                 </div>
             </div>
             {# Main content #}
-            <div class="flex flex-col ml-[112px]">
-                <div class="flex justify-between mr-[96px] mt-[60px]">
+            <div class="flex flex-col ml-5 desktop:ml-[112px]">
+                <div class="flex justify-between mr-[20px] desktop:mr-[96px] mt-[60px]">
                     <div></div>
                     <img class="w-[180px] h-[116px]" src="/images/logo.png" alt="Plessis-Robinson logo">
                 </div>
-                <div class="flex flex-col mr-[260px]">
+                <div class="flex flex-col mr-[112px] desktop:mr-[260px]">
                     <h1 class="text-colorBlueGreen text-[64px] mb-[120px]">Le Plessis-Robinson vous guide !</h1>
                     <h2 class="text-[32px] mb-[36px]">Que recherchez-vous ?</h2>
                     <div class="flex flex-row gap-[28px] mb-[70px]">
@@ -43,7 +47,7 @@
                             <div class="flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
                         </a>
                         <a href="#map">
-                            <div class="flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                            <div class="hidden desktop:flex flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
                         </a>
                     </div>
                 </div>
