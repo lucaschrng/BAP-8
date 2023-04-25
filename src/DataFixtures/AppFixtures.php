@@ -26,6 +26,8 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
+        $list_image_location=["https://static.actu.fr/uploads/2020/01/capture-d-ecran-2020-01-15-a-002813.png","https://maville.com/photosmvi/2021/01/27/P24515945D4472810G.jpg","https://cdn.discordapp.com/attachments/1024340270675927160/1100341301909655622/image6.PNG","https://maisondesarts.plessis-robinson.com/sites/default/files/banner/mediatheque_maison_des_arts_0.jpg","https://www.hauts-de-seine.fr/fileadmin/_processed_/5/e/csm_BoisGarenne_9747b9bcbd.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ch%C3%A2teau_de_la_Solitude_%2815361224669%29.jpg/800px-Ch%C3%A2teau_de_la_Solitude_%2815361224669%29.jpg","https://www.plessis-robinson.com/uploads/media/cite-jardin_01.jpg","https://i.skyrock.net/9844/60229844/pics/3011381733_1_3_SmzC9UIE.jpg","https://www.plessis-robinson.com/uploads/pics/jardins_mairie.jpg","https://lavilledurable.plessis-robinson.com/wp-content/uploads/2017/02/arbres.jpg"];
+        $re=0;
         foreach ($locations as $location) {
             $newLocation = new Location();
             $newLocation->setName($location->name);
@@ -35,7 +37,13 @@ class AppFixtures extends Fixture
             $newLocation->setDescription('Ceci est une description de ' . $location->name);
             $type = $manager->getRepository(Type::class)->findOneBy(['type_name' => $location->type]);
             $newLocation->addType($type);
-
+            if ($re<10){
+                $newLocation->setImage($list_image_location[$re]);
+                $re++;
+            }
+            else{
+                $newLocation->setImage("Image a remplir ici");
+            }
             $manager->persist($newLocation);
         }
 
