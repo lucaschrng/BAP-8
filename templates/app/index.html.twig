@@ -3,14 +3,15 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-[50px]">
+    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-[20px]">
         <h2 class="mainTitle font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h2>
         <p class="desktop:text-xl text-white font-txt tablet:text-[16px]">Cela nous aidera à faire un premier filtre pour vous aider</p>
         <div class="selectFilter flex flex-row justify-center desktop:mt-4 tablet:mt-0">
-            {% for type in types|slice(0,5) %}
-                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
-                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+            {% for subtype in subtypes %}
+                <div class="subtype filter flex flex-col justify-start items-center desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
+                    <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                        <img class="w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}">
+                    </div>
                 </div>
             {% endfor %}
         </div>
@@ -124,7 +125,7 @@
     </div>
     </div>
 `;
-        }
+        }}
 
     </script>
     <div id="map" style="height: 400px; width: 100%"></div>
