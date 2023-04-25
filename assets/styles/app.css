@@ -52,6 +52,31 @@ h1, h2 {
 #bg-color.active {
     background-color: #FC6B3B;
 }
+.leaflet-control-attribution{
+    display: none;
+}
+#left-carousel{
+    animation: carousel_down 3s linear infinite;
+}
+@keyframes carousel_down {
+    0% {
+        transform: translateY(-150%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+#right-carousel{
+    animation: carousel_up 3s linear infinite;
+}
+@keyframes carousel_up {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-150%);
+    }
+}
 @media screen and (max-width: 1499px) {
     #menu-btn {
         transition: .2s linear;
