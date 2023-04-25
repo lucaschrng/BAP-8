@@ -58,7 +58,7 @@
             </section>
             <div class="flex flex-row-reverse desktop:flex-row relative">
                 {# Filtres #}
-                <section id="filtre" class="absolute z-10 flex flex-col items-center w-[320px] tablet:w-[372px] h-[calc(100vh-64px)] tablet:h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">      
+                <section id="filtre" class="absolute z-10 flex flex-col items-center w-[320px] tablet:w-[372px] h-[calc(100vh-64px)] tablet:h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">
                     <div class="flex items-center">
                         <div id="close-filtre" class="flex items-center justify-center relative right-[60px] tablet:right-[80px] w-[36px] h-[36px] rounded-full border-2 border-white ml-[36px] cursor-pointer desktop:hidden"><i class="fa-solid fa-chevron-left text-[12px]"></i></div>
                         <h2 class="text-3xl mt-6 mb-5 pr-[70px] desktop:p-0"> Filtres </h2>
@@ -74,10 +74,10 @@
                         </div>
                     </div>
                     <div id="locations-info" class="w-full pb-4 gap-y-[24px] hidden overflow-auto items-center" ></div>
-                    <div class="w-[280px] tablet:w-[300px] overflow-auto hidden">
+                    <div class="w-[280px] tablet:w-[300px] overflow-auto">
                         {% for type in types %}
                         <div class="grid gap-[10px] mb-[5px]">
-                            <div class="flex items-center">
+                            <div class="filter-div flex items-center">
                                 <div id="filter-btn-{{ loop.index }}" class="flex justify-center items-center bg-white w-8 h-8 rounded-lg self-center mr-[10px] cursor-pointer">
                                     <div id="isCheck-{{ loop.index }}" class="w-6 h-6 rounded-[5px] bg-[#FC6B3B] hidden"></div>
                                 </div>
