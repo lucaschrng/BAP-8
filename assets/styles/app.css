@@ -60,7 +60,7 @@ h1, h2 {
 }
 @keyframes carousel_down {
     0% {
-        transform: translateY(-150%);
+        transform: translateY(-200%);
     }
     100% {
         transform: translateY(0);
@@ -74,7 +74,7 @@ h1, h2 {
         transform: translateY(0);
     }
     100% {
-        transform: translateY(-150%);
+        transform: translateY(-200%);
     }
 }
 @media screen and (max-width: 1499px) {

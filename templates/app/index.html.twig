@@ -8,16 +8,20 @@
         <section class="h-[100vh] w-full flex flex-row">
             {# Carousel #}
             <div class="h-[100vh] flex overflow-hidden">
-                <div id="left-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[96px]">
+                <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px]">
                     {% for location in locations|slice(0,5) %}
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                    {% endfor %}
+                    {% for location in locations|slice(0,5) %}
+                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
                     {% endfor %}
                 </div>
                 <div id="right-carousel" class="flex flex-col w-[326px] h-[326px] gap-[30px] ml-[20px]">
                     {% for location in locations|slice(0,5) %}
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
-                        <img class="object-contain rounded-[10px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">
+                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
+                    {% endfor %}
+                    {% for location in locations|slice(0,5) %}
+                        <img class="object-fill rounded-[10px] w-[326px] h-[326px]" src="{{ asset('/uploads/images/locations/' ~ location.image) }}" alt="{{ location.name }}">    
                     {% endfor %}
                 </div>
             </div>
