@@ -41,9 +41,6 @@ class AppFixtures extends Fixture
                 $newLocation->setImage($list_image_location[$re]);
                 $re++;
             }
-            else{
-                $newLocation->setImage("Image a remplir ici");
-            }
             $manager->persist($newLocation);
         }
 
