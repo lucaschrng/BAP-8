@@ -6,6 +6,7 @@ use App\Entity\Subtype;
 use App\Form\SubcategoryType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -22,7 +23,11 @@ class SubtypeCrudController extends AbstractCrudController
             TextField::new('name'),
             CollectionField::new('options')
                 ->allowAdd()
-                ->setEntryType(SubcategoryType::class)
+                ->setEntryType(SubcategoryType::class),
+            ImageField::new('image_url')
+                ->setBasePath('uploads/images/locations/')
+                ->setUploadDir('public/uploads/images/locations/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
         ];
     }
 }
