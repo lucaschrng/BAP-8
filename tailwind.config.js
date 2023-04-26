@@ -9,7 +9,8 @@ module.exports = {
         colors: {
             colorGreen: '#1A6E6A',
             colorOrange : "#FC6B3B",
-            colorBlueGreen : "#19647E"
+            colorBlueGreen : "#19647E",
+            colorBeige:  "#FFFAE8",
         }
     },
     fontFamily : {

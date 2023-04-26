@@ -5,7 +5,7 @@
 {% block body %}
     <div class="flex flex-col">
         {# Main section #}
-        <section class="h-[100vh] tablet:h-[545px] desktop:h-[100vh] flex flex-row overflow-hidden">
+        <section class="h-[100vh] tablet:h-[545px] desktop:h-[100vh] flex flex-row overflow-hidden bg-colorBeige">
             {# Carousel #}
             <div class="h-[100vh] w-full hidden desktop:flex desktop:mr-[40px] min-[1600px]:mr-[112px]">
                 <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px]">
@@ -106,8 +106,8 @@
                 </section>
                 {# Map #}
                 <section class="absolute z-0 top-0 h-[90vh] desktop:h-[100vh] w-full">
-                    <div class="relative top-0 flex flex-col items-end h-[calc(100vh-56px)] desktop:h-[100vh] w-full">
-                        <div id="map" class="absolute z-0 w-full h-[calc(100vh-56px)] tablet:h-[90vh] desktop:h-[100vh] desktop:w-[calc(100%-372px)]"></div> 
+                    <div class="relative top-0 flex flex-col items-end h-[calc(100vh-56px)] tablet:h-[calc(100vh-95px)] desktop:h-[100vh] w-full">
+                        <div id="map" class="absolute z-0 w-full h-[calc(100vh-56px)] tablet:h-[calc(100vh-95px)] desktop:h-[100vh] desktop:w-[calc(100%-372px)]"></div> 
                         <div class="popup-container absolute bottom-0 right-0 w-full z-1 hidden bg-white overflow-y-auto h-[769px] desktop:h-[300px] desktop:w-[calc(100%-372px)] flex flex-col desktop:flex-row" id="location-content"></div>
                     </div>
                 </section>  

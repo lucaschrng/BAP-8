@@ -56,7 +56,7 @@ h1, h2 {
     display: none;
 }
 #left-carousel{
-    animation: carousel_down 3s linear infinite;
+    animation: carousel_down 10s linear infinite;
 }
 @keyframes carousel_down {
     0% {
@@ -67,7 +67,7 @@ h1, h2 {
     }
 }
 #right-carousel{
-    animation: carousel_up 3s linear infinite;
+    animation: carousel_up 10s linear infinite;
 }
 @keyframes carousel_up {
     0% {
