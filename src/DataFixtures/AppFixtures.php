@@ -27,16 +27,16 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         $list_image_location=[
-            "\images\capture-d-ecran-2020-01-15-a-002813.png",
-            "\images\P24515945D4472810G.webp",
-            "\images\image6.png",
-            "\images\mediatheque_maison_des_arts_0.jpg",
-            "\images\csm_BoisGarenne_9747b9bcbd.jpg",
-            "\images\Château_de_la_Solitude_(15361224669).jpg",
-            "\images\cite-jardin_01.jpg",
-            "\images\\3011381733_1_3_SmzC9UIE.jpg",
-            "\images\jardins_mairie.jpg",
-            "\images\arbres.jpg"
+            "/images/capture-d-ecran-2020-01-15-a-002813.png",
+            "/images/P24515945D4472810G.webp",
+            "/images/image6.png",
+            "/images/mediatheque_maison_des_arts_0.jpg",
+            "/images/csm_BoisGarenne_9747b9bcbd.jpg",
+            "/images/Château_de_la_Solitude_(15361224669).jpg",
+            "/images/cite-jardin_01.jpg",
+            "/images/3011381733_1_3_SmzC9UIE.jpg",
+            "/images/jardins_mairie.jpg",
+            "/images/arbres.jpg"
         ];
         $re=0;
         foreach ($locations as $location) {
