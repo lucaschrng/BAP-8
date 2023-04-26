@@ -26,7 +26,18 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
-        $list_image_location=["https://static.actu.fr/uploads/2020/01/capture-d-ecran-2020-01-15-a-002813.png","https://maville.com/photosmvi/2021/01/27/P24515945D4472810G.jpg","https://cdn.discordapp.com/attachments/1024340270675927160/1100341301909655622/image6.PNG","https://maisondesarts.plessis-robinson.com/sites/default/files/banner/mediatheque_maison_des_arts_0.jpg","https://www.hauts-de-seine.fr/fileadmin/_processed_/5/e/csm_BoisGarenne_9747b9bcbd.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ch%C3%A2teau_de_la_Solitude_%2815361224669%29.jpg/800px-Ch%C3%A2teau_de_la_Solitude_%2815361224669%29.jpg","https://www.plessis-robinson.com/uploads/media/cite-jardin_01.jpg","https://i.skyrock.net/9844/60229844/pics/3011381733_1_3_SmzC9UIE.jpg","https://www.plessis-robinson.com/uploads/pics/jardins_mairie.jpg","https://lavilledurable.plessis-robinson.com/wp-content/uploads/2017/02/arbres.jpg"];
+        $list_image_location=[
+            "\images\capture-d-ecran-2020-01-15-a-002813.png",
+            "\images\P24515945D4472810G.webp",
+            "\images\image6.png",
+            "\images\mediatheque_maison_des_arts_0.jpg",
+            "\images\csm_BoisGarenne_9747b9bcbd.jpg",
+            "\images\Château_de_la_Solitude_(15361224669).jpg",
+            "\images\cite-jardin_01.jpg",
+            "\images\\3011381733_1_3_SmzC9UIE.jpg",
+            "\images\jardins_mairie.jpg",
+            "\images\arbres.jpg"
+        ];
         $re=0;
         foreach ($locations as $location) {
             $newLocation = new Location();

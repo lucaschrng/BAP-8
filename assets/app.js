@@ -41,7 +41,7 @@ let markers = [];
 
 function displayLocation(image, name, typesNames, address, horaires, description, info) {
     selectedLocation.innerHTML = `
-        <img class="popup-image w-[100vw] h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${image ? require(`${image}`) : require("../public/images/image-missing.png")}" alt="${location.name}">
+        <img class="popup-image w-[100vw] h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${image ? require(image) : require("../public/images/image-missing.png")}" alt="${location.name}">
         <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
             <div class="flex justify-between items-start">
                 <h2 class="popup-title text-[32px] tablet:text-5xl desktop:text-[44px] font-sans text-colorBlueGreen leading-[90%]">${name}</h2>
