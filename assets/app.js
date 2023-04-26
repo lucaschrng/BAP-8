@@ -321,17 +321,26 @@ subtypes.forEach((subtype, index) => {
                 })
           }
       })
+      window.scrollTo(0, window.innerHeight);
   })
 })
 
 const filterButtons = document.querySelectorAll('[id^="filter-btn-"]');
+const filtersDiv = document.querySelectorAll('.filter-div');
+const activeFilters = []
 
-filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const subtypeIndex = button.id.split('-').pop();
-      const locationsToDisplay = locations.filter((location) =>
-        location.typesNames.some((type) => subtypesQueries[subtypeIndex - 1].includes(type))
+filtersDiv.forEach((button) => {
+    button.children[0].addEventListener('click', () => {
+        if (!button.children[0].classList.contains('active')) {
+            activeFilters.splice(activeFilters.indexOf(button.children[1].innerHTML.replace('&amp;', '&')), 1);
+        } else {
+            activeFilters.push(button.children[1].innerHTML.replace('&amp;', '&'));
+        }
+      let locationsToDisplay = locations.filter((location) =>
+        location.typesNames.some((type) => activeFilters.includes(type))
       );
+
+        if (activeFilters.length === 0) locationsToDisplay = locations;
   
       markers.forEach((marker) => {
         map.removeLayer(marker);
@@ -364,7 +373,7 @@ filterButtons.forEach((button) => {
     });
   });
   
-const filtersDiv = document.querySelectorAll('.filter-div');
+
 subtypes.forEach((subtype, index) => {
   subtype.addEventListener('click', () => {
         filtersDiv.forEach((filterDiv) => {
