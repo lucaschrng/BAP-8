@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
-        $list_image_location=[
+        $list_image_location = [
             "/images/capture-d-ecran-2020-01-15-a-002813.png",
             "/images/P24515945D4472810G.webp",
             "/images/image6.png",
@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
             "/images/jardins_mairie.jpg",
             "/images/arbres.jpg"
         ];
-        $re=0;
+        $re = 0;
         foreach ($locations as $location) {
             $newLocation = new Location();
             $newLocation->setName($location->name);
@@ -48,7 +48,7 @@ class AppFixtures extends Fixture
             $newLocation->setDescription('Ceci est une description de ' . $location->name);
             $type = $manager->getRepository(Type::class)->findOneBy(['type_name' => $location->type]);
             $newLocation->addType($type);
-            if ($re<10){
+            if ($re < 10) {
                 $newLocation->setImage($list_image_location[$re]);
                 $re++;
             }
@@ -137,8 +137,8 @@ class AppFixtures extends Fixture
                     "subcategory" => "médecin"
                 ]
             ],
-            "Lieu culturel" => [],
-            "Educations" => [
+            "Lieux culturels" => [],
+            "Education" => [
                 [
                     "options" => [
                         [
@@ -190,13 +190,15 @@ class AppFixtures extends Fixture
             ]
         ];
 
-        $list_images=["/images/image1.png",
-                      "/images/image2.png",
-                      "/images/image3.png",
-                      "/images/image4.png",
-                      "/images/image5.png"];
+        $list_images = [
+            "/images/image1.png",
+            "/images/image2.png",
+            "/images/image3.png",
+            "/images/image4.png",
+            "/images/image5.png"
+        ];
 
-        $rec=0;
+        $rec = 0;
         foreach ($data as $subtype => $options) {
             $newSubtype = new Subtype();
             $newSubtype->setName($subtype);
