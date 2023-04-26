@@ -39,7 +39,7 @@ let menu = document.getElementById('menu-btn');
 let locations;
 let markers = [];
 
-function displayLocation(image, name, typesNames, address, horaires, description, info) {
+function displayLocation(image, name, typesNames, address, horaires, description) {
     selectedLocation.innerHTML = `
         <img class="popup-image w-[100vw] h-[218px] tablet:h-[459px] object-cover desktop:w-[20vw] desktop:h-full desktop:object-contain" src="${image ? image : require("../public/images/image-missing.png")}" alt="${location.name}">
         <section class="flex flex-col mt-3 mr-5 ml-5 tablet:mt-6 tablet:mr-6 desktop:w-full">
@@ -60,7 +60,7 @@ function displayLocation(image, name, typesNames, address, horaires, description
                         flex justify-center items-center bg-white text-base font-bold
                         border-4 border-solid border-colorGreen rounded-lg 
                         tablet:w-[212px] desktop:w-[241px] h-12  desktop:text-xl 
-                        " href="https://www.google.com/search?${info}" target="_blank">En savoir plus</a>
+                        " href="https://www.google.com/search?q=${name}" target="_blank">En savoir plus</a>
                         <a class="popup-directions 
                         flex justify-center items-center bg-colorOrange text-base font-bold rounded-lg text-white
                         tablet:w-[150px] desktop:w-[163px] h-12  desktop:text-xl
@@ -96,7 +96,6 @@ function fetchData() {
                 let address = location.address
                 let horaire = location.horaires
                 let description = location.description
-                let info = location.info
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
@@ -104,7 +103,7 @@ function fetchData() {
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();            
                 marker.on('click', () => {
-                        displayLocation(image, name, typesNames, address, horaire, description, info)
+                        displayLocation(image, name, typesNames, address, horaire, description)
                         map.setView(marker.getLatLng(), 16);
                 })
             })
@@ -141,7 +140,6 @@ if (select) {
                 let address = location.address
                 let horaire = location.horaires
                 let description = location.description
-                let info = location.info
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
@@ -149,7 +147,7 @@ if (select) {
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
                 marker.on('click', () => {
-                    displayLocation(image, name, typesNames, address, horaire, description, info)
+                    displayLocation(image, name, typesNames, address, horaire, description)
                     map.setView(marker.getLatLng(), 16);
                 })
             }
@@ -184,7 +182,6 @@ if (search) {
                 let address = location.address
                 let horaire = location.horaires
                 let description = location.description
-                let info = location.info
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
@@ -192,7 +189,7 @@ if (search) {
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
                 marker.on('click', () => {
-                    displayLocation(image, name, typesNames, address, horaire, description, info);
+                    displayLocation(image, name, typesNames, address, horaire, description);
                     map.setView(marker.getLatLng(), 16);
                 })
                 if (!searchValue.trim()) {
@@ -308,7 +305,6 @@ subtypes.forEach((subtype, index) => {
                 let address = location.address
                 let horaire = location.horaires
                 let description = location.description
-                let info = location.info
                 let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
                 let popup = L.popup().setContent(popupContent);
                 let marker = L.marker([location.latitude, location.longitude]);
@@ -316,62 +312,71 @@ subtypes.forEach((subtype, index) => {
                 marker.addTo(map);
                 marker.bindPopup(popup).openPopup();
                 marker.on('click', () => {
-                    displayLocation(image, name, typesNames, address, horaire, description, info)
+                    displayLocation(image, name, typesNames, address, horaire, description)
                     map.setView(marker.getLatLng(), 16);
                 })
           }
-      })
+        })
+        window.scrollTo(0, window.innerHeight);
+    })
   })
-})
-
-const filterButtons = document.querySelectorAll('[id^="filter-btn-"]');
-
-filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const subtypeIndex = button.id.split('-').pop();
-      const locationsToDisplay = locations.filter((location) =>
-        location.typesNames.some((type) => subtypesQueries[subtypeIndex - 1].includes(type))
-      );
   
-      markers.forEach((marker) => {
-        map.removeLayer(marker);
-      });
-      markers = [];
-
-      locationsToDisplay.forEach((location) => {
-        let image = location.image;
-        let name = location.name;
-        let typesNames = location.typesNames.join(', ');
-        let address = location.address;
-        let horaire = location.horaires;
-        let description = location.description;
-        let info = location.info;
-        let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
-        let popup = L.popup().setContent(popupContent);
-        let marker = L.marker([location.latitude, location.longitude]);
-        markers.push(marker);
-        marker.addTo(map);
-        marker.bindPopup(popup).openPopup();
-        marker.on('click', () => {
-          displayLocation(image, name, typesNames, address, horaire, description, info);
-          map.setView(marker.getLatLng(), 16);
+  const filterButtons = document.querySelectorAll('[id^="filter-btn-"]');
+  const filtersDiv = document.querySelectorAll('.filter-div');
+  const activeFilters = []
+  
+  filtersDiv.forEach((button) => {
+      button.children[0].addEventListener('click', () => {
+          if (!button.children[0].classList.contains('active')) {
+              activeFilters.splice(activeFilters.indexOf(button.children[1].innerHTML.replace('&amp;', '&')), 1);
+          } else {
+              activeFilters.push(button.children[1].innerHTML.replace('&amp;', '&'));
+          }
+        let locationsToDisplay = locations.filter((location) =>
+          location.typesNames.some((type) => activeFilters.includes(type))
+        );
+  
+          if (activeFilters.length === 0) locationsToDisplay = locations;
+    
+        markers.forEach((marker) => {
+          map.removeLayer(marker);
+        });
+        markers = [];
+  
+        locationsToDisplay.forEach((location) => {
+          let image = location.image;
+          let name = location.name;
+          let typesNames = location.typesNames.join(', ');
+          let address = location.address;
+          let horaire = location.horaires;
+          let description = location.description;
+          let info = location.info;
+          let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
+          let popup = L.popup().setContent(popupContent);
+          let marker = L.marker([location.latitude, location.longitude]);
+          markers.push(marker);
+          marker.addTo(map);
+          marker.bindPopup(popup).openPopup();
+          marker.on('click', () => {
+            displayLocation(image, name, typesNames, address, horaire, description, info);
+            map.setView(marker.getLatLng(), 16);
+          });
+        });
+    
+        filterButtons.forEach((btn) => {
+          btn.children[0].classList.toggle('hidden', btn !== button);
         });
       });
-  
-      filterButtons.forEach((btn) => {
-        btn.children[0].classList.toggle('hidden', btn !== button);
-      });
     });
-  });
+    
   
-const filtersDiv = document.querySelectorAll('.filter-div');
-subtypes.forEach((subtype, index) => {
-  subtype.addEventListener('click', () => {
+  subtypes.forEach((subtype, index) => {
+    subtype.addEventListener('click', () => {
+          filtersDiv.forEach((filterDiv) => {
+              if (filterDiv.children[0].classList.contains('active')) filterDiv.children[0].click();
+          })
         filtersDiv.forEach((filterDiv) => {
-            if (filterDiv.children[0].classList.contains('active')) filterDiv.children[0].click();
+            if (subtypesQueries[index].includes(filterDiv.children[1].textContent)) filterDiv.children[0].click();
         })
-      filtersDiv.forEach((filterDiv) => {
-          if (subtypesQueries[index].includes(filterDiv.children[1].textContent)) filterDiv.children[0].click();
-      })
+    })
   })
-})

@@ -37,7 +37,7 @@
                     <h2 class="text-[24px] tablet:text-[32px] mb-4 desktop:mb-[36px] block tablet:hidden desktop:block">Que recherchez-vous ?</h2>
                     <div class="flex tablet:hidden desktop:flex desktop:flex-row flex-wrap desktop:flex-nowrap gap-4 tablet:gap-7 mb-4 tablet:mb-[70px] max-tablet:p-5 tablet:p-0 justify-center items-center">
                         {% for subtype in subtypes %}
-                            <div class="subtype flex flex-col justify-start items-center w-[131px] desktop:w-[131px] desktop:h-full">
+                            <div class="subtype flex flex-col justify-start items-center w-[131px] desktop:w-[131px] desktop:h-full cursor-pointer">
                                 <div class="bg-red-500 w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
                                     <img class="w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}">
                                 </div>
