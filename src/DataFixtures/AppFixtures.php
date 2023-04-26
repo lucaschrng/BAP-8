@@ -190,7 +190,11 @@ class AppFixtures extends Fixture
             ]
         ];
 
-        $list_images=["https://cdn.discordapp.com/attachments/1073173059017642034/1100332738667630592/pascal-bernardon-u5wJWy2Ji0k-unsplash_1.jpg","https://cdn.discordapp.com/attachments/1073173059017642034/1100332741461037066/joliotcurie-070-red-jpg_1.jpg","https://cdn.discordapp.com/attachments/1073173059017642034/1100332723014475896/allegria_culture_1.jpg","https://cdn.discordapp.com/attachments/1073173059017642034/1100332721701670962/jared-rice-NTyBbu66_SI-unsplash_1.jpg","https://cdn.discordapp.com/attachments/1073173059017642034/1100332724906119178/brooke-cagle-g1Kr4Ozfoac-unsplash_1.jpg"];
+        $list_images=["/images/image1.png",
+                      "/images/image2.png",
+                      "/images/image3.png",
+                      "/images/image4.png",
+                      "/images/image5.png"];
 
         $rec=0;
         foreach ($data as $subtype => $options) {
