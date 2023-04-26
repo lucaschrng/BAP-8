@@ -160,6 +160,7 @@ if (select) {
 
 let search = document.getElementById("search");
 let locationInfo = document.getElementById("locations-info");
+let typeFilter = document.getElementById("type-filter");
 let count = 0;
 
 if (search) {
@@ -213,6 +214,7 @@ if (search) {
                             `
                     locationInfo.appendChild(div);
                     locationInfo.classList.add('active');
+                    typeFilter.classList.add('active');
                     div.addEventListener('click', () => {
                         let divs = document.querySelectorAll('.result');
                         divs.forEach((div) => {
@@ -224,8 +226,9 @@ if (search) {
             }
         })
         if (count === 0) {
-            locationInfo.innerHTML = `<div class="font-semibold">Aucun résultat trouvé</div>`;
+            locationInfo.innerHTML = `<div class="font-semibold mb-5">Aucun résultat trouvé</div>`;
             locationInfo.classList.add('active');
+            typeFilter.classList.remove('active');
         } else {
             const countMention = document.createElement('div');
             countMention.classList.add('font-semibold');
@@ -321,6 +324,46 @@ subtypes.forEach((subtype, index) => {
   })
 })
 
+const filterButtons = document.querySelectorAll('[id^="filter-btn-"]');
+
+filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const subtypeIndex = button.id.split('-').pop();
+      const locationsToDisplay = locations.filter((location) =>
+        location.typesNames.some((type) => subtypesQueries[subtypeIndex - 1].includes(type))
+      );
+  
+      markers.forEach((marker) => {
+        map.removeLayer(marker);
+      });
+      markers = [];
+
+      locationsToDisplay.forEach((location) => {
+        let image = location.image;
+        let name = location.name;
+        let typesNames = location.typesNames.join(', ');
+        let address = location.address;
+        let horaire = location.horaires;
+        let description = location.description;
+        let info = location.info;
+        let popupContent = "<b>" + name + "</b><br><a href='https://www.google.com/maps/place/" + address + "'>Itinéraire</a>";
+        let popup = L.popup().setContent(popupContent);
+        let marker = L.marker([location.latitude, location.longitude]);
+        markers.push(marker);
+        marker.addTo(map);
+        marker.bindPopup(popup).openPopup();
+        marker.on('click', () => {
+          displayLocation(image, name, typesNames, address, horaire, description, info);
+          map.setView(marker.getLatLng(), 16);
+        });
+      });
+  
+      filterButtons.forEach((btn) => {
+        btn.children[0].classList.toggle('hidden', btn !== button);
+      });
+    });
+  });
+  
 const filtersDiv = document.querySelectorAll('.filter-div');
 subtypes.forEach((subtype, index) => {
   subtype.addEventListener('click', () => {

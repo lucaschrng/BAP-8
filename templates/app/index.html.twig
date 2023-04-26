@@ -32,27 +32,27 @@
                     <img class="w-[64px] h-[41px] tablet:w-[123px] tablet:h-[79px] desktop:w-[180px] desktop:h-[116px]" src="/images/logo.png" alt="Plessis-Robinson logo">
                 </div>
                 <div class="flex flex-col desktop:mr-[260px]">
-                    <h1 class="text-colorBlueGreen tablet:mb-[23px] desktop:mb-[120px] text-[32px] tablet:text-[48px] desktop:text-[64px] mt-2 tablet:mt-[72px] desktop:m-0 break-words w-[350px] tablet:w-[650px] desktop:w-full leading-[44px] leading-normal">Le Plessis-Robinson vous guide !</h1>
-                    <p class="mb-8 tablet:mb-6 block desktop:hidden w-[350px] tablet:w-[580px] desktop:m-0 break-words">Retrouvez où faire vos démarches facilement avec notre carte interactive.</p>
+                    <h1 class="text-colorBlueGreen mb-4 tablet:mb-[23px] desktop:mb-[120px] text-[32px] tablet:text-[48px] desktop:text-[64px] mt-2 tablet:mt-[72px] desktop:m-0 break-words w-[350px] tablet:w-[650px] desktop:w-full leading-[44px] leading-normal">Le Plessis-Robinson vous guide !</h1>
+                    <p class="mb-4 tablet:mb-6 block desktop:hidden w-[350px] tablet:w-[580px] desktop:m-0 break-words">Retrouvez où faire vos démarches facilement avec notre carte interactive.</p>
                     <h2 class="text-[24px] tablet:text-[32px] mb-4 desktop:mb-[36px] block tablet:hidden desktop:block">Que recherchez-vous ?</h2>
-                    <div class="flex tablet:hidden desktop:flex desktop:flex-row flex-wrap desktop:flex-nowrap gap-4 tablet:gap-7 mb-4 tablet:mb-[70px] p-5 tablet:p-0 justify-center items-center">
+                    <div class="flex tablet:hidden desktop:flex desktop:flex-row flex-wrap desktop:flex-nowrap gap-4 tablet:gap-7 mb-4 tablet:mb-[70px] max-tablet:p-5 tablet:p-0 justify-center items-center">
                         {% for subtype in subtypes %}
-                            <div class="subtype flex flex-col justify-start items-center w-[154px] desktop:w-[131px] h-full">
+                            <div class="subtype flex flex-col justify-start items-center w-[131px] desktop:w-[131px] desktop:h-full">
                                 <div class="bg-red-500 w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
-                                
+                                    <img class="w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}">
                                 </div>
                                 <p class="font-medium mt-2 tablet:mt-4 text-xs desktop:text-base text-center">{{ subtype.name }}</p>
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="flex desktop:justify-between tablet:mb-[50px] desktop:m-0">
-                        <a href="#map" class="hidden desktop:flex">
+                    <div class="flex justify-center tablet:justify-start desktop:justify-between tablet:mb-[50px] desktop:m-0 max-tablet:w-full">
+                        <a href="#data" class="hidden desktop:flex">
                             <div class="hidden desktop:flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
                         </a>
-                        <a href="#map" class="hidden desktop:flex">
-                            <div class="flex tablet:hidden desktop:flex justify-center items-center w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold">Aller directement à la carte</div>
+                        <a href="#map" class="flex tablet:hidden desktop:flex max-tablet:w-full max-tablet:pr-[18px]">
+                            <div class="flex tablet:hidden desktop:flex justify-center items-center w-full desktop:w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold max-tablet:bg-colorOrange max-tablet:text-white">Aller directement à la carte</div>
                         </a>
-                        <a href="#map" class="tablet:flex desktop:hidden">
+                        <a href="#map" class="hidden tablet:flex desktop:hidden">
                             <div class="tablet:flex desktop:hidden justify-center items-center w-[237px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Carte Interactive</div>
                         </a>
                     </div>
@@ -61,8 +61,6 @@
         </section>
 
         <section class="h-[50vh] bg-red-500 hidden tablet:flex desktop:hidden">
-        </section>
-        <section class="h-[20vh] hidden tablet:flex desktop:hidden">
         </section>
         {# Map section #}
         <section class="flex flex-col">
@@ -73,7 +71,7 @@
             </section>
             <div class="flex flex-row-reverse desktop:flex-row relative">
                 {# Filtres #}
-                <section id="filtre" class="absolute z-10 flex flex-col items-center w-[320px] tablet:w-[372px] h-[calc(100vh-64px)] tablet:h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">
+                <section id="filtre" class="absolute z-10 flex flex-col items-center w-[320px] tablet:w-[372px] h-[calc(100vh-56px)] tablet:h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">
                     <div class="flex items-center">
                         <div id="close-filtre" class="flex items-center justify-center relative right-[60px] tablet:right-[80px] w-[36px] h-[36px] rounded-full border-2 border-white ml-[36px] cursor-pointer desktop:hidden"><i class="fa-solid fa-chevron-left text-[12px]"></i></div>
                         <h2 class="text-3xl mt-6 mb-5 pr-[70px] desktop:p-0"> Filtres </h2>
@@ -89,7 +87,7 @@
                         </div>
                     </div>
                     <div id="locations-info" class="w-full pb-4 gap-y-[24px] hidden overflow-auto items-center" ></div>
-                    <div class="w-[280px] tablet:w-[300px] overflow-auto">
+                    <div id="type-filter" class="flex w-[280px] tablet:w-[300px] overflow-auto">
                         {% for type in types %}
                         <div class="grid gap-[10px] mb-[5px]">
                             <div class="filter-div flex items-center">
@@ -108,8 +106,8 @@
                 </section>
                 {# Map #}
                 <section class="absolute z-0 top-0 h-[90vh] desktop:h-[100vh] w-full">
-                    <div class="relative top-0 flex flex-col items-end h-[90vh] desktop:h-[100vh] w-full">
-                        <div id="map" class="absolute z-0 w-full h-[90vh] desktop:h-[100vh] desktop:w-[calc(100%-372px)]"></div> 
+                    <div class="relative top-0 flex flex-col items-end h-[calc(100vh-56px)] desktop:h-[100vh] w-full">
+                        <div id="map" class="absolute z-0 w-full h-[calc(100vh-56px)] tablet:h-[90vh] desktop:h-[100vh] desktop:w-[calc(100%-372px)]"></div> 
                         <div class="popup-container absolute bottom-0 right-0 w-full z-1 hidden bg-white overflow-y-auto h-[769px] desktop:h-[300px] desktop:w-[calc(100%-372px)] flex flex-col desktop:flex-row" id="location-content"></div>
                     </div>
                 </section>  
