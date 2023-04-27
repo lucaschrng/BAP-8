@@ -1,7 +1,99 @@
-body {
-    background-color: lightgray;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: finalsix, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+h1, h2 {
+    font-family: bely-display, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+[id^="isCheck-"].active {
+    display: block;
+    animation: isVisible .3s linear;
+}
+@keyframes isVisible {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+[id^="navbar-"] {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+[id^="navbar-"].active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);  
+    transition: .2s ease-out;                  
+}
+[id^="navbar-"].active li {
+    display: block;
+}
+
+#location-content.active {
+    display: flex;
+}
+#locations-info {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#locations-info::-webkit-scrollbar {
+    display: none;
+}
+#locations-info.active {
+    display: flex;
+    flex-direction: column;
+}
+#bg-color.active {
+    background-color: #FC6B3B;
+}
+.leaflet-control-attribution{
+    display: none;
+}
+#left-carousel{
+    animation: carousel_down 3s linear infinite;
+}
+@keyframes carousel_down {
+    0% {
+        transform: translateY(-150%);
+    }
+    100% {
+        transform: translateY(10%);
+    }
+}
+#right-carousel{
+    animation: carousel_up 3s linear infinite;
+}
+@keyframes carousel_up {
+    0% {
+        transform: translateY(10%);
+    }
+    100% {
+        transform: translateY(-150%);
+    }
+}
+@media screen and (max-width: 1499px) {
+    #menu-btn {
+        transition: .2s linear;
+    }
+    #menu-btn.fa-times{
+        transform: rotate(180deg);
+        transition: .2s linear;
+    }
+    #filtre {
+        display: flex;
+        clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+        transition: .3s ease-out;
+        opacity:0%;
+    }
+    #filtre.active {
+        clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%); 
+        transition: .4s ease-out;  
+        opacity: 100%;              
+    }
+}

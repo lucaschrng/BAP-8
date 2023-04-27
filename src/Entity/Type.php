@@ -36,9 +36,13 @@ class Type
     #[Groups(['type:list', 'type:item'])]
     private Collection $locations;
 
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Subtype::class)]
+    private Collection $subtypes;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
+        $this->subtypes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,6 +89,36 @@ class Type
     {
         if ($this->locations->removeElement($location)) {
             $location->removeType($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Subtype>
+     */
+    public function getSubtypes(): Collection
+    {
+        return $this->subtypes;
+    }
+
+    public function addSubtype(Subtype $subtype): self
+    {
+        if (!$this->subtypes->contains($subtype)) {
+            $this->subtypes->add($subtype);
+            $subtype->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubtype(Subtype $subtype): self
+    {
+        if ($this->subtypes->removeElement($subtype)) {
+            // set the owning side to null (unless already changed)
+            if ($subtype->getType() === $this) {
+                $subtype->setType(null);
+            }
         }
 
         return $this;

@@ -68,6 +68,9 @@ class Location
     #[Groups(['location:list', 'location:item'])]
     private array $typesIds = [];
 
+    #[Groups(['location:list', 'location:item'])]
+    private array $typesNames = [];
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -224,5 +227,19 @@ class Location
             $this->typesIds[] = $type->getId();
         }
         return $this->typesIds;
+    }
+
+    public function getTypesNames(): ?array
+    {
+        $this->typesNames = [];
+        foreach ($this->types as $type) {
+            $this->typesNames[] = $type->getTypeName();
+        }
+        return $this->typesNames;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

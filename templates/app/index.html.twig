@@ -3,34 +3,147 @@
 {% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] w-100[vh] h-100[vh] object-contain tablet:p-[20px]">
-        <h2 class="mainTitle font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h2>
-        <p class="desktop:text-xl text-white font-txt tablet:text-[16px]">Cela nous aidera à faire un premier filtre pour vous aider</p>
-        <div class="selectFilter flex flex-row justify-center desktop:mt-4 tablet:mt-0">
-            {% for subtype in subtypes %}
-                <div class="subtype filter flex flex-col justify-start items-center desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
-                    <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
-                        <img class="w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}">
+    <div class="flex flex-col">
+        {# Main section #}
+        <section class="h-[100vh] tablet:h-[545px] desktop:h-[100vh] flex flex-row overflow-hidden bg-colorBeige">
+            {# Carousel #}
+            <div class="h-[100vh] w-full hidden desktop:flex desktop:mr-[40px] min-[1600px]:mr-[112px]">
+                <div id="left-carousel" class="flex flex-col gap-[30px] ml-[96px]">
+                    {% for location in locations|slice(0,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[256px] max-[1900px]:min-w-[326px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
+                    {% endfor %}
+                    {% for location in locations|slice(0,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[256px] max-[1900px]:min-w-[326px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
+                    {% endfor %}
+                </div>
+                <div id="right-carousel" class="flex flex-col gap-[30px] ml-[20px] max-[1900px]:hidden">
+                    {% for location in locations|slice(5,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[326px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
+                    {% endfor %}
+                    {% for location in locations|slice(5,5) %}
+                        <img class="object-cover rounded-[10px] min-w-[326px] min-h-[256px]" src="{{ location.image }}" alt="{{ location.name }}">
+                    {% endfor %}
+                </div>
+            </div>
+            {# Main content #}
+            <div class="flex flex-col pl-[18px] tablet:pl-[25px] desktop:pl-0 w-full">
+                <div class="flex justify-between mr-[22px] mt-[65px] tablet:mr-[20px] desktop:mr-[96px] tablet:mt-[60px] desktop:mt-[60px]">
+                    <div></div>
+                    <img class="w-[64px] h-[41px] tablet:w-[123px] tablet:h-[79px] desktop:w-[180px] desktop:h-[116px]" src="/images/logo.png" alt="Plessis-Robinson logo">
+                </div>
+                <div class="flex flex-col desktop:mr-[260px]">
+                    <h1 class="text-colorBlueGreen mb-4 tablet:mb-[23px] desktop:mb-[120px] text-[32px] tablet:text-[48px] desktop:text-[64px] mt-2 tablet:mt-[72px] desktop:m-0 break-words w-[350px] tablet:w-[650px] desktop:w-full leading-[44px] leading-normal">Le Plessis-Robinson vous guide !</h1>
+                    <p class="mb-4 tablet:mb-6 block desktop:hidden w-[350px] tablet:w-[580px] desktop:m-0 break-words">Retrouvez où faire vos démarches facilement avec notre carte interactive.</p>
+                    <h2 class="text-[24px] tablet:text-[32px] mb-4 desktop:mb-[36px] block tablet:hidden desktop:block">Que recherchez-vous ?</h2>
+                    <div class="flex tablet:hidden desktop:flex desktop:flex-row flex-wrap desktop:flex-nowrap gap-4 tablet:gap-7 mb-4 tablet:mb-[70px] max-tablet:p-5 tablet:p-0 justify-center items-center">
+                        {% for subtype in subtypes %}
+                            <div class="subtype flex flex-col justify-start items-center w-[131px] desktop:w-[131px] desktop:h-full">
+                                <div class="bg-red-500 w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                                    <img class="w-[112px] h-[112px] desktop:w-[132px] desktop:h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}">
+                                </div>
+                                <p class="font-medium mt-2 tablet:mt-4 text-xs desktop:text-base text-center">{{ subtype.name }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="flex justify-center tablet:justify-start desktop:justify-between tablet:mb-[50px] desktop:m-0 max-tablet:w-full">
+                        <a href="#data" class="hidden desktop:flex">
+                            <div class="hidden desktop:flex justify-center items-center w-[218px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Trouver un lieu</div>
+                        </a>
+                        <a href="#map" class="flex tablet:hidden desktop:flex max-tablet:w-full max-tablet:pr-[18px]">
+                            <div class="flex tablet:hidden desktop:flex justify-center items-center w-full desktop:w-[323px] h-[43px] border-colorOrange border-4 border-solid rounded-lg rounded-[8px] font-bold max-tablet:bg-colorOrange max-tablet:text-white">Aller directement à la carte</div>
+                        </a>
+                        <a href="#map" class="hidden tablet:flex desktop:hidden">
+                            <div class="tablet:flex desktop:hidden justify-center items-center w-[237px] h-[43px] bg-colorOrange text-white rounded-[8px] font-bold">Carte Interactive</div>
+                        </a>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-        <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
-            <div class="selectedStep items-center justify-center">
-                <p class="stepText font-txt text-center text-white tablet:text-[16px]">Etape</p>
-                <div class="someClass pt-2"></div>
-                <div class="stepBall flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">1</div>
-                <div class="someOtherClass pb-7"></div>
             </div>
-            <div class="seperator flex items-center justify-center text-white text-xl">------</div>
-            <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
-            <div class="seperator flex items-center justify-center text-white text-xl">------</div>
-            <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
-        </div>
-        <div class="secondaryBlock desktop:hidden tablet:flex flex-col items-center justify-center text-white">
-            <p class="redirectionMap text-[16px] font-txt">Allez directement à la carte interactive</p>
-            <i class="fa-solid fa-chevron-down"></i>
-        </div>
+        </section>
+
+        <section class="desktop:w-[100vh] h-[100vh] bg-red-500 tablet:flex w-[50vh]">
+            {# Filter #}
+            <div class="flex flex-col items-center justify-center desktop:p-36 gap-10 bg-[#1A6E6A] object-contain tablet:p-[28px]">
+                <h2 class="mainTitle font-bold font-sans desktop:text-[64px] text-[#FFFAE8] tablet:text-[32px]">Que recherchez-vous ?</h2>
+                <p class="desktop:text-xl text-white font-txt tablet:text-[16px]">Cela nous aidera à faire un premier filtre pour vous aider à trouver ce dont vous avez besoin !</p>
+                <div class="selectFilter flex flex-row justify-center desktop:mt-4 tablet:mt-9">
+                    {% for subtype in subtypes %}
+                        <div class="subtype filter flex flex-col justify-start items-center desktop:mx-[56px] px-16 tablet:mx-0 px-[39px]">
+                            <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                                <img class="w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover desktop:opacity-50 hover:opacity-100 tablet:opacity-100" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}" onclick="goToStep2()">
+                                <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ subtype.name }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="stepMenu flex flex-row items-center justify-center desktop:m-12 p-16 tablet:p-12" id="stepMenu">
+                    <div class="selectedStep items-center justify-center">
+                        <p class="stepText font-txt text-center text-white tablet:text-[16px]">Etape</p>
+                        <div class="someClass pt-2"></div>
+                        <div class="stepBall flex items-center justify-center w-20 h-20 bg-[#FC6B3B] rounded-full text-white text-5xl font-bold">1</div>
+                        <div class="someOtherClass pb-7"></div>
+                    </div>
+                    <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+                    <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+                    <div class="seperator flex items-center justify-center text-white text-xl">------</div>
+                    <div class="ball flex items-center justify-center w-14 h-14 bg-[#19647E] rounded-full border-4 border-[#8A675C]"></div>
+                </div>
+                <div class="secondaryBlock desktop:hidden tablet:flex flex-col items-center justify-center text-white">
+                    <p class="redirectionMap text-[16px] font-txt">Allez directement à la carte interactive</p>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+        {# Map section #}
+        <section class="flex flex-col">
+            {# Menu #}
+            <section class="flex flex-row items-center justify-between bg-colorGreen w-full h-[56px] tablet:h-[96px] py-[2rem] px-[1.25rem] text-white desktop:hidden">
+                <h2 class="text-[24px] tablet:text-[32px]"> Cartes Interactive </h2>
+                <div id="menu-btn" class="fas fa-bars text-[2rem] cursor-pointer"></div>
+            </section>
+            <div class="flex flex-row-reverse desktop:flex-row relative">
+                {# Filtres #}
+                <section id="filtre" class="absolute z-10 flex flex-col items-center w-[320px] tablet:w-[372px] h-[calc(100vh-56px)] tablet:h-[calc(100vh-96px)] desktop:h-[100vh] bg-colorGreen text-white z-10 hidden desktop:flex">
+                    <div class="flex items-center">
+                        <div id="close-filtre" class="flex items-center justify-center relative right-[60px] tablet:right-[80px] w-[36px] h-[36px] rounded-full border-2 border-white ml-[36px] cursor-pointer desktop:hidden"><i class="fa-solid fa-chevron-left text-[12px]"></i></div>
+                        <h2 class="text-3xl mt-6 mb-5 pr-[70px] desktop:p-0"> Filtres </h2>
+                    </div>
+                    <div class="mb-8 flex flex-col justify-center">
+                        <div class="w-[280px] tablet:w-[324px] h-[37px] text-black rounded-[5px] bg-white">
+                            <input id="search" class="mx-[10px] w-[260px] tablet:w-[304px] h-[37px] outline-none rounded-[5px]" type="text" placeholder="Search..">
+                        </div>
+                        <div class="w-[280px] tablet:w-[324px] h-[37px]  mt-3 text-black rounded-[5px] bg-white">
+                            <select name="type" id="type" class="mx-[10px] w-[260px] tablet:w-[304px] h-[37px] text-black outline-none rounded-[5px]">
+                                <option value="all">Tous</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="locations-info" class="w-full pb-4 gap-y-[24px] hidden overflow-auto items-center" ></div>
+                    <div id="type-filter" class="flex w-[280px] tablet:w-[300px] overflow-auto">
+                        {% for type in types %}
+                        <div class="grid gap-[10px] mb-[5px]">
+                            <div class="filter-div flex items-center">
+                                <div id="filter-btn-{{ loop.index }}" class="flex justify-center items-center bg-white w-8 h-8 rounded-lg self-center mr-[10px] cursor-pointer">
+                                    <div id="isCheck-{{ loop.index }}" class="w-6 h-6 rounded-[5px] bg-[#FC6B3B] hidden"></div>
+                                </div>
+                                <p class="text-[16px]">{{ type }}</p>
+                            </div>
+                            <div id="navbar-{{ loop.index }}" class="flex flex-col gap-[10px] relative top-0 right-0 mb-[5px]">
+                                {% for location in type.locations %}
+                                    <li class="ml-[30px] mr-[5px] before:text-red-500 list-outside hidden"> {{ location }} </li>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                </section>
+                {# Map #}
+                <section class="absolute z-0 top-0 h-[90vh] desktop:h-[100vh] w-full">
+                    <div class="relative top-0 flex flex-col items-end h-[calc(100vh-56px)] tablet:h-[calc(100vh-95px)] desktop:h-[100vh] w-full">
+                        <div id="map" class="absolute z-0 w-full h-[calc(100vh-56px)] tablet:h-[calc(100vh-95px)] desktop:h-[100vh] desktop:w-[calc(100%-372px)]"></div>
+                        <div class="popup-container absolute bottom-0 right-0 w-full z-1 hidden bg-white overflow-y-auto h-[769px] desktop:h-[300px] desktop:w-[calc(100%-372px)] flex flex-col desktop:flex-row" id="location-content"></div>
+                    </div>
+                </section>
+            </div>
+        </section>
     </div>
 
     <script>
@@ -46,12 +159,14 @@
         function goToStep1() {
             titleMain.innerText = "Que recherchez-vous ?";
             filterSelect.innerHTML = `
-             {% for type in types|slice(0,5) %}
-                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
-                    <img src="{{ asset('images/querecherchezvous/servicemunicipaux.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep2()">
-                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+        {% for subtype in subtypes %}
+            <div class="subtype filter flex flex-col justify-start items-center desktop:mx-[56px] px-16 tablet:mx-0 px-[39px]">
+                <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                    <img class="w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover desktop:opacity-50 hover:opacity-100 tablet:opacity-100" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}" onclick="goToStep2()">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ subtype.name }}</p>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
     `;
             stepMenu.innerHTML = `
         <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
@@ -72,12 +187,14 @@
         function goToStep2() {
             titleMain.innerText = "Qui êtes-vous ?";
             filterSelect.innerHTML = `
-            {% for type in types|slice(0,5) %}
-                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
-                    <img src="{{ asset('images/querecherchezvous/santes.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40" onclick="goToStep3()">
-                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+        {% for subtype in subtypes %}
+            <div class="subtype filter flex flex-col justify-start items-center desktop:mx-[56px] px-16 tablet:mx-0 px-[39px]">
+                <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                    <img class="w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover desktop:opacity-50 hover:opacity-100 tablet:opacity-100" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}"     onclick="goToStep3()">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ subtype.name }}</p>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
     `;
             stepMenu.innerHTML = `
     <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
@@ -101,12 +218,14 @@
         function goToStep3() {
             titleMain.innerText = "Que voulez-vous faire ?";
             filterSelect.innerHTML = `
-            {% for type in types|slice(0,5) %}
-                <div class="filter flex flex-col desktop:mx-10 px-16 tablet:mx-0 px-[39px]">
-                    <img src="{{ asset('images/querecherchezvous/educations.png') }}" alt="Services Municipaux" class="desktop:w-80 h-80 object-contain desktop:opacity-50 hover:opacity-100 cursor-pointer tablet:opacity-100 w-40 h-40"">
-                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ type }}</p>
+        {% for subtype in subtypes %}
+            <div class="subtype filter flex flex-col justify-start items-center desktop:mx-[56px] px-16 tablet:mx-0 px-[39px]">
+                <div class="bg-red-500 w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px]">
+                    <img class="w-[132px] h-[132px] rounded-tr-[30px] rounded-bl-[30px] object-cover desktop:opacity-50 hover:opacity-100 tablet:opacity-100" src="{{ subtype.imageUrl }}" alt="{{ subtype.name }}">
+                    <p class="font-txt text-center desktop:text-[32px] text-white tablet:text-[16px]">{{ subtype.name }}</p>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
     `;
             stepMenu.innerHTML = `
     <div class="stepMenu flex flex-row items-center justify-center m-5" id="stepMenu">
@@ -126,17 +245,8 @@
     </div>
 `;
         }
-
     </script>
-    <div id="map" style="height: 400px; width: 100%"></div>
-    <label for="type">Type de lieu</label>
-    <select name="type" id="type">
-        <option value="all">Tous</option>
-    </select>
-    <div id="test"></div>
-
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
-
 {% endblock %}
